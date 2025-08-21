@@ -34,7 +34,7 @@ The new commits should have been written, and GPG signatures verified.
 
 ## Upgrading Astro and integrations
 
-Upgrade to the latest version of Astro, and upgrade all integrations to their latest versions. 
+Upgrade to the latest version of Astro, and upgrade all integrations to their latest versions.
 
 ```
 npx @astrojs/upgrade
