@@ -30,25 +30,10 @@ const skills: string[] = [
 const happy: boolean = true;
 const finished: boolean = true;
 const goal: number = 3;
-
-const skillColor: string = "navy";
-const fontWeight: string = "bold";
-const textCase: string = "uppercase";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
 	<body>
-		<style is:global define:vars={{ skillColor, fontWeight, textCase }}>
-			h1 {
-				color: purple;
-				font-size: 4rem;
-			}
-			.skill {
-				color: var(--skillColor);
-				font-weight: var(--fontWeight);
-				text-transform: var(--textCase);
-			}
-		</style>
 		<h2>... and my new Astro site!</h2>
 
 		<p>

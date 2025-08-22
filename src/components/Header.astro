@@ -5,9 +5,41 @@ import ThemeIcon from "./ThemeIcon.astro";
 ---
 
 <header>
-	<nav>
-		<Hamburger />
-		<ThemeIcon />
-		<Navigation />
-	</nav>
+	<Hamburger />
+	<Navigation />
+	<ThemeIcon />
 </header>
+
+<script>
+	const hamburger = document.querySelector(".hamburger");
+	const navLinks = document.querySelector(".nav-links");
+
+	hamburger?.addEventListener("click", () => {
+		navLinks?.classList.toggle("expanded");
+
+		const isExpanded = navLinks?.classList.contains("expanded");
+
+		// Safely convert the state to a string ("true" or "false")
+		// 1. Boolean(isExpanded) converts true -> true; false/undefined -> false
+		// 2. String(...) converts the boolean result to the required string
+		const newAriaExpandedState = String(Boolean(isExpanded));
+
+		hamburger?.setAttribute("aria-expanded", newAriaExpandedState);
+	});
+</script>
+
+<style>
+	header :global(.nav-links) {
+		display: none;
+	}
+
+	header :global(.nav-links.expanded) {
+		display: unset;
+	}
+
+	@media screen and (min-width: 636px) {
+		header :global(.nav-links) {
+			display: block;
+		}
+	}
+</style>
