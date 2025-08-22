@@ -1,3 +1,23 @@
 {
-  "cSpell.words": ["frontmatter", "Habari", "hackthebox", "jimdiroffii"]
+	"cSpell.words": [
+		"Diroff",
+		"disr",
+		"frontmatter",
+		"geckoformboundaryad",
+		"Habari",
+		"hackthebox",
+		"jimdiroffii",
+		"JSESSIONID",
+		"mktemp",
+		"myform",
+		"nmap",
+		"Obins",
+		"OGNL",
+		"println",
+		"privesc",
+		"Referer",
+		"rwsrwsrwx",
+		"Tanium",
+		"tcpdump"
+	]
 }
