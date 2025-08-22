@@ -91,7 +91,41 @@
 </style>
 
 <script>
+	// TypeScript-safe interfaces
+	interface Theme {
+		key: string;
+		label: string;
+		tooltip: string;
+		nextTooltip: string;
+	}
+
+	interface ThemeChangeEvent extends CustomEvent {
+		detail: {
+			preference: string;
+			isDark: boolean;
+		};
+	}
+
+	interface ThemeManager {
+		getPreference(): string;
+		setPreference(preference: string): void;
+		THEMES: Record<string, string>;
+	}
+
+	// Extend Window interface for TypeScript
+	declare global {
+		interface Window {
+			themeManager: ThemeManager;
+		}
+	}
+
 	class ThemeToggle {
+		private button: HTMLElement | null;
+		private label: HTMLElement | null;
+		private tooltipText: HTMLElement | null;
+		private themes: Theme[];
+		private currentIndex: number = 0;
+
 		constructor() {
 			this.button = document.getElementById("theme-toggle");
 			this.label = document.getElementById("theme-label");
@@ -118,11 +152,10 @@
 				},
 			];
 
-			this.currentIndex = 0;
 			this.init();
 		}
 
-		init() {
+		private init(): void {
 			// Wait for themeManager to be available
 			if (typeof window.themeManager === "undefined") {
 				setTimeout(() => this.init(), 10);
@@ -140,22 +173,25 @@
 			this.bindEvents();
 		}
 
-		bindEvents() {
+		private bindEvents(): void {
 			// Handle button clicks
-			this.button?.addEventListener("click", () => this.cycleTheme());
+			if (this.button) {
+				this.button.addEventListener("click", () => this.cycleTheme());
 
-			// Handle keyboard navigation
-			this.button?.addEventListener("keydown", (e) => {
-				if (e.key === "Enter" || e.key === " ") {
-					e.preventDefault();
-					this.cycleTheme();
-				}
-			});
+				// Handle keyboard navigation
+				this.button.addEventListener("keydown", (e: KeyboardEvent) => {
+					if (e.key === "Enter" || e.key === " ") {
+						e.preventDefault();
+						this.cycleTheme();
+					}
+				});
+			}
 
 			// Listen for external theme changes
-			window.addEventListener("theme-changed", (e) => {
+			window.addEventListener("theme-changed", (e: Event) => {
+				const themeEvent = e as ThemeChangeEvent;
 				const newIndex = this.themes.findIndex(
-					(theme) => theme.key === e.detail.preference
+					(theme) => theme.key === themeEvent.detail.preference
 				);
 				if (newIndex !== -1 && newIndex !== this.currentIndex) {
 					this.currentIndex = newIndex;
@@ -164,25 +200,39 @@
 			});
 		}
 
-		cycleTheme() {
+		private cycleTheme(): void {
+			if (!window.themeManager) return;
+
 			this.currentIndex = (this.currentIndex + 1) % this.themes.length;
 			const newTheme = this.themes[this.currentIndex];
 
-			// Update theme via global manager
-			window.themeManager.setPreference(newTheme.key);
-			this.updateDisplay();
+			if (newTheme) {
+				// Update theme via global manager
+				window.themeManager.setPreference(newTheme.key);
+				this.updateDisplay();
 
-			// Announce change to screen readers
-			this.announceChange(newTheme.label);
+				// Announce change to screen readers
+				this.announceChange(newTheme.label);
+			}
 		}
 
-		updateDisplay() {
+		private updateDisplay(): void {
 			const currentTheme = this.themes[this.currentIndex];
 			const nextTheme =
 				this.themes[(this.currentIndex + 1) % this.themes.length];
 
+			if (!currentTheme || !nextTheme) return;
+
 			// Update button data attribute for CSS
-			this.button?.setAttribute("data-theme", currentTheme.key);
+			if (this.button) {
+				this.button.setAttribute("data-theme", currentTheme.key);
+
+				// Update aria-label for better accessibility
+				this.button.setAttribute(
+					"aria-label",
+					`Current theme: ${currentTheme.label}. Click to switch to ${nextTheme.label}.`
+				);
+			}
 
 			// Update label text
 			if (this.label) {
@@ -193,15 +243,9 @@
 			if (this.tooltipText) {
 				this.tooltipText.textContent = currentTheme.nextTooltip;
 			}
-
-			// Update aria-label for better accessibility
-			this.button?.setAttribute(
-				"aria-label",
-				`Current theme: ${currentTheme.label}. Click to switch to ${nextTheme.label}.`
-			);
 		}
 
-		announceChange(themeName) {
+		private announceChange(themeName: string): void {
 			// Create a temporary element to announce the change to screen readers
 			const announcement = document.createElement("div");
 			announcement.setAttribute("aria-live", "polite");
@@ -213,15 +257,21 @@
 
 			// Remove after announcement
 			setTimeout(() => {
-				document.body.removeChild(announcement);
+				if (document.body.contains(announcement)) {
+					document.body.removeChild(announcement);
+				}
 			}, 1000);
 		}
 	}
 
 	// Initialize when DOM is ready
-	if (document.readyState === "loading") {
-		document.addEventListener("DOMContentLoaded", () => new ThemeToggle());
-	} else {
+	function initThemeToggle(): void {
 		new ThemeToggle();
+	}
+
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initThemeToggle);
+	} else {
+		initThemeToggle();
 	}
 </script>
