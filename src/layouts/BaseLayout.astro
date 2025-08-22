@@ -11,6 +11,9 @@ const { pageTitle } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content="{Astro.generator}" />
+
+		<!-- TODO: Remove the robots directive when ready to go live -->
+		<meta name="robots" content="noindex, nofollow" />
 		<title>{pageTitle}</title>
 	</head>
 	<body>

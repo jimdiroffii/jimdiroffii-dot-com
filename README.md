@@ -2,6 +2,11 @@
 
 An Astro website
 
+## TODO
+
+- [ ] Modify robots.txt to allow indexing
+- [ ] Modify meta robots tag in BaseLayout to allow indexing
+
 ## Build Status
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/63b7ed2f-2996-4d5b-ae9a-628ab9a2f800/deploy-status)](https://app.netlify.com/projects/jimdiroffii-dot-com/deploys)
