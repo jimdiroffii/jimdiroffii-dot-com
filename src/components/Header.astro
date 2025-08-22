@@ -1,13 +1,32 @@
 ---
 import Hamburger from "./Hamburger.astro";
 import Navigation from "./Navigation.astro";
-import ThemeIcon from "./ThemeIcon.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 ---
 
-<header>
-	<Hamburger />
-	<Navigation />
-	<ThemeIcon />
+<header
+	class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 transition-colors duration-200"
+>
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="flex items-center justify-between h-16">
+			<div class="flex items-center">
+				<Hamburger />
+			</div>
+
+			<nav class="hidden md:block">
+				<Navigation />
+			</nav>
+
+			<div class="flex items-center space-x-4">
+				<ThemeToggle />
+			</div>
+		</div>
+	</div>
+
+	<!-- Mobile navigation -->
+	<div class="md:hidden">
+		<Navigation />
+	</div>
 </header>
 
 <script>

@@ -1,7 +1,9 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
 import "../styles/global.css";
+
 const { pageTitle } = Astro.props;
 ---
 
@@ -15,11 +17,122 @@ const { pageTitle } = Astro.props;
 		<!-- TODO: Remove the robots directive when ready to go live -->
 		<meta name="robots" content="noindex, nofollow" />
 		<title>{pageTitle}</title>
+
+		<script is:inline>
+			// Theme management with system preference support
+			const THEME_KEY = "theme-preference";
+			const THEMES = {
+				LIGHT: "light",
+				DARK: "dark",
+				SYSTEM: "system",
+			};
+
+			// Get the user's theme preference
+			function getThemePreference() {
+				const stored = localStorage.getItem(THEME_KEY);
+				return stored && Object.values(THEMES).includes(stored)
+					? stored
+					: THEMES.SYSTEM;
+			}
+
+			// Determine if dark mode should be active
+			function shouldUseDarkMode(preference) {
+				switch (preference) {
+					case THEMES.DARK:
+						return true;
+					case THEMES.LIGHT:
+						return false;
+					case THEMES.SYSTEM:
+					default:
+						return window.matchMedia("(prefers-color-scheme: dark)").matches;
+				}
+			}
+
+			// Apply the theme to the document
+			function applyTheme(preference) {
+				const isDark = shouldUseDarkMode(preference);
+
+				if (isDark) {
+					document.documentElement.classList.add("dark");
+				} else {
+					document.documentElement.classList.remove("dark");
+				}
+
+				// Update meta theme-color for mobile browsers
+				const metaThemeColor = document.querySelector(
+					'meta[name="theme-color"]'
+				);
+				if (metaThemeColor) {
+					metaThemeColor.setAttribute(
+						"content",
+						isDark ? "#000000" : "#ffffff"
+					);
+				}
+
+				return isDark;
+			}
+
+			// Initialize theme immediately to prevent flash
+			const initialPreference = getThemePreference();
+			const initialIsDark = applyTheme(initialPreference);
+
+			// Save the preference if it wasn't explicitly set
+			localStorage.setItem(THEME_KEY, initialPreference);
+
+			// Listen for system theme changes
+			window
+				.matchMedia("(prefers-color-scheme: dark)")
+				.addEventListener("change", (e) => {
+					const currentPreference = getThemePreference();
+					// Only respond to system changes when in system mode
+					if (currentPreference === THEMES.SYSTEM) {
+						applyTheme(currentPreference);
+						// Dispatch custom event for components to listen to
+						window.dispatchEvent(
+							new CustomEvent("theme-changed", {
+								detail: {
+									preference: currentPreference,
+									isDark: e.matches,
+								},
+							})
+						);
+					}
+				});
+
+			// Make theme functions available globally for components
+			window.themeManager = {
+				getPreference: getThemePreference,
+				setPreference: (newPreference) => {
+					if (!Object.values(THEMES).includes(newPreference)) return;
+
+					localStorage.setItem(THEME_KEY, newPreference);
+					const isDark = applyTheme(newPreference);
+
+					// Dispatch event for components
+					window.dispatchEvent(
+						new CustomEvent("theme-changed", {
+							detail: {
+								preference: newPreference,
+								isDark,
+							},
+						})
+					);
+				},
+				THEMES,
+			};
+		</script>
+
+		<!-- Theme color meta tag for mobile browsers -->
+		<meta name="theme-color" content="#ffffff" />
 	</head>
-	<body>
+	<body
+		class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200"
+	>
 		<Header />
-		<h1>{pageTitle}</h1>
-		<slot />
+		<main>
+			<h1 class="font-bold text-4xl m-5">{pageTitle}</h1>
+			<slot />
+		</main>
 		<Footer />
 	</body>
 </html>

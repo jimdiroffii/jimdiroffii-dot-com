@@ -1,64 +1,22 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/***
+ * CSS Variables
+ * Central place to manage theme colors and other reusable values.
+ */
+:root {
+	--clr-dark: #000;
+	--clr-darkgrey: #222;
+	--clr-light: #fff;
+	--textarea-header-height: 0.8em;
+}
 
 * {
 	box-sizing: border-box;
 }
 
-html {
-	background-color: #b4daff;
-	font-family: sans-serif;
-}
-
-html.dark {
-	background-color: #0d0950;
-	color: #fff;
-}
-
-.dark .nav-links a {
-	color: #fff;
-}
-
-body {
-	margin: 0 auto;
-	width: 100%;
-	max-width: 80ch;
-	padding: 1rem;
-	line-height: 1.5;
-}
-
-h1 {
-	margin: 1rem 0;
-	font-size: 2.5rem;
-}
-
-/***
- * Tags
- */
-
-.tags {
-	display: flex;
-	flex-wrap: wrap;
-}
-
-.tags a {
-	color: #00539f;
-}
-
-.tag {
-	margin: 0.25em;
-	border: dotted 1px #a1a1a1;
-	border-radius: 0.5em;
-	padding: 0.5em 1em;
-	font-size: 1.15em;
-	background-color: #f8fcfd;
-}
-
-/***
- * Footer
- */
-
-footer {
-	display: flex;
-	gap: 1rem;
-	margin-top: 2rem;
+*::before,
+*::after {
+	box-sizing: inherit;
 }

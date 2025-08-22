@@ -1,8 +1,8 @@
 ---
-
+// This component now has no server-side logic
 ---
 
-<button id="themeToggle">
+<button id="themeToggle" aria-label="Toggle theme">
 	<svg width="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 		<path
 			class="sun"
@@ -21,14 +21,15 @@
 	#themeToggle {
 		border: 0;
 		background: none;
+		cursor: pointer;
 	}
+	/* The sun and moon icon styles remain the same and work perfectly */
 	.sun {
 		fill: black;
 	}
 	.moon {
 		fill: transparent;
 	}
-
 	:global(.dark) .sun {
 		fill: transparent;
 	}
@@ -37,35 +38,12 @@
 	}
 </style>
 
-<script is:inline>
-	const theme = (() => {
-		const localStorageTheme = localStorage?.getItem("theme") ?? "";
-		if (["dark", "light"].includes(localStorageTheme)) {
-			return localStorageTheme;
-		}
-		if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-			return "dark";
-		}
-		return "light";
-	})();
+<script>
+	// This script now only handles the click event
+	const themeToggle = document.getElementById("themeToggle");
 
-	if (theme === "light") {
-		document.documentElement.classList.remove("dark");
-	} else {
-		document.documentElement.classList.add("dark");
-	}
-
-	window.localStorage.setItem("theme", theme);
-
-	const handleToggleClick = () => {
-		const element = document.documentElement;
-		element.classList.toggle("dark");
-
-		const isDark = element.classList.contains("dark");
+	themeToggle?.addEventListener("click", () => {
+		const isDark = document.documentElement.classList.toggle("dark");
 		localStorage.setItem("theme", isDark ? "dark" : "light");
-	};
-
-	document
-		.getElementById("themeToggle")
-		?.addEventListener("click", handleToggleClick);
+	});
 </script>
