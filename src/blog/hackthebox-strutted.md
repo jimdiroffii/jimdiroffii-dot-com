@@ -28,7 +28,7 @@ It uses an OpenJDK container to build `strutted-1.0.0.war` using maven, then cop
 
 In the `pom.xml` file, a version number for Apache Struts is disclosed, `6.3.0.1`. This version has a RCE CVE, `CVE-2024-53677`.
 
-### Struts Vulnerablity
+### Struts Vulnerability
 
 There is detail on this vulnerability on [Tanium](https://help.tanium.com/bundle/CVE-2024-31497/page/VERT/CVE-2024-53677/Understanding_Apache_Struts.htm). It explains _CVE-2024-53677 is a critical file upload vulnerability in the default Interceptor class (FileUploadInterceptor) of Struts 2_.
 
