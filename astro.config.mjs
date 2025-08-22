@@ -5,9 +5,7 @@ import netlify from "@astrojs/netlify";
 
 import preact from "@astrojs/preact";
 
-
 import tailwindcss from "@tailwindcss/vite";
-
 
 // https://astro.build/config
 export default defineConfig({
