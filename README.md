@@ -6,6 +6,8 @@ An Astro website
 
 - [ ] Modify robots.txt to allow indexing
 - [ ] Modify meta robots tag in BaseLayout to allow indexing
+- [ ] Remove SVG from Git LFS tracking
+- [ ] Setup Netlify headers in `netlify.toml` before production deployment (see example below)
 
 ## Build Status
 
@@ -43,4 +45,26 @@ Upgrade to the latest version of Astro, and upgrade all integrations to their la
 
 ```
 npx @astrojs/upgrade
+```
+
+## Netlify Header Configuration
+
+An example netlify header configuration for production use: 
+
+```toml
+# Security + caching headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+
+# Cache hashed build assets aggressively (Astro emits /_astro/* by default)
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
 ```
