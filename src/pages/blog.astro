@@ -6,21 +6,59 @@ import BlogPost from "../components/BlogPost.astro";
 const pageTitle = "Blog";
 
 // Exclude drafts and sort newest first
-const posts: CollectionEntry<"blog">[] = (
+const all: CollectionEntry<"blog">[] = (
 	await getCollection("blog", ({ data }) => !data.draft)
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Featured post validation
+const featured = all.filter((p) => typeof p.data.featuredRank === "number");
+
+if (featured.length > 3) {
+	throw new Error(`Too many featured posts: ${featured.length} (max 3).`);
+}
+const ranks = featured.map((p) => p.data.featuredRank!);
+if (ranks.some((r) => r < 1 || r > 3)) {
+	throw new Error(`Invalid featuredRank detected (allowed: 1-3).`);
+}
+
+const unique = new Set(ranks);
+if (unique.size !== ranks.length) {
+	throw new Error(`Duplicate featuredRank found. Ranks must be unique.`);
+}
+
+featured.sort((a, b) => a.data.featuredRank! - b.data.featuredRank!);
+
+const regular = all.filter((p) => typeof p.data.featuredRank !== "number");
 ---
 
 <BaseLayout pageTitle={pageTitle}>
 	{
-		posts.length === 0 ? (
-			<p>No posts yet.</p>
-		) : (
-			<ul>
-				{posts.map((post) => (
-					<BlogPost url={`/posts/${post.id}/`} title={post.data.title} />
-				))}
-			</ul>
+		featured.length > 0 && (
+			<section aria-labelledby="featured-heading" class="mb-8">
+				<h2 id="featured-heading" class="m-5 text-2xl font-semibold">
+					Featured
+				</h2>
+				<ul>
+					{featured.map((post) => (
+						<BlogPost url={`/posts/${post.id}/`} title={post.data.title} />
+					))}
+				</ul>
+			</section>
 		)
 	}
+
+	<section aria-labelledby="all-posts-heading">
+		<h2 id="all-posts-heading" class="m-5 text-2xl font-semibold">All posts</h2>
+		{
+			regular.length === 0 ? (
+				<p class="px-5">No posts yet.</p>
+			) : (
+				<ul>
+					{regular.map((post) => (
+						<BlogPost url={`/posts/${post.id}/`} title={post.data.title} />
+					))}
+				</ul>
+			)
+		}
+	</section>
 </BaseLayout>

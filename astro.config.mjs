@@ -9,13 +9,14 @@ import tailwindcss from "@tailwindcss/vite";
 
 import sitemap from "@astrojs/sitemap";
 
-// https://astro.build/config
+import featuredGuard from "./plugins/featured-guard";
+
 export default defineConfig({
   site: "https://jimdiroffii-dot-com.netlify.app/",
   adapter: netlify(),
   integrations: [preact(), sitemap()],
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), featuredGuard()],
   },
 });
