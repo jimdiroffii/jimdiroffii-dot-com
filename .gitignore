@@ -380,3 +380,6 @@ $RECYCLE.BIN/
 
 # Local Backups for files
 .backup
+
+# Local copy of a tree file
+tree.txt
