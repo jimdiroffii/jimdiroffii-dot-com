@@ -1,19 +1,26 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogPost from "../components/BlogPost.astro";
-const allPosts = await getCollection("blog");
-const pageTitle: string = "Blog";
+
+const pageTitle = "Blog";
+
+// Exclude drafts and sort newest first
+const posts: CollectionEntry<"blog">[] = (
+	await getCollection("blog", ({ data }) => !data.draft)
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-	<p>Imagine there are some new posts here</p>
-
-	<ul>
-		{
-			allPosts.map((post: any) => (
-				<BlogPost url={`/posts/${post.id}/`} title={post.data.title} />
-			))
-		}
-	</ul>
+	{
+		posts.length === 0 ? (
+			<p>No posts yet.</p>
+		) : (
+			<ul>
+				{posts.map((post) => (
+					<BlogPost url={`/posts/${post.id}/`} title={post.data.title} />
+				))}
+			</ul>
+		)
+	}
 </BaseLayout>
