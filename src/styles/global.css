@@ -2,21 +2,12 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /***
- * CSS Variables
- * Central place to manage theme colors and other reusable values.
+ * Ensure UA widgets follow the active theme (dark/light)
  */
 :root {
-  --clr-dark: #000;
-  --clr-darkgrey: #222;
-  --clr-light: #fff;
-  --textarea-header-height: 0.8em;
+  color-scheme: light;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-*::before,
-*::after {
-  box-sizing: inherit;
+:root.dark {
+  color-scheme: dark;
 }

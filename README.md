@@ -10,8 +10,7 @@ An Astro website
 - [ ] Remove SVG from Git LFS tracking
 - [ ] Setup Netlify headers in `netlify.toml` before production deployment (see example below)
 - [ ] Update the `rss.xml.js` file to include proper title, description, etc.
-- [ ] Add skip to content link 
-
+- [ ] Add skip to content link
 
 ## Build Status
 
@@ -72,3 +71,9 @@ An example netlify header configuration for production use:
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 ```
+
+## Dark mode behavior
+
+- Theme is applied pre-paint via an inline script. Explicit user choices (`light`/`dark`) override system.
+- In “system” mode the site follows `prefers-color-scheme` when the browser exposes live updates.
+- Some Firefox themes and privacy forks can pin native widget appearance or `prefers-color-scheme`.
