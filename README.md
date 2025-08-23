@@ -4,10 +4,12 @@ An Astro website
 
 ## TODO
 
-- [ ] Modify robots.txt to allow indexing
-- [ ] Modify meta robots tag in BaseLayout to allow indexing
+- [ ] Modify `robots.txt.ts` to allow indexing (automatically generates robots file)
+- [ ] Modify meta robots tag in `BaseLayout.astro` to allow indexing
+- [ ] Update production URL domain in `astro.config.mjs`
 - [ ] Remove SVG from Git LFS tracking
 - [ ] Setup Netlify headers in `netlify.toml` before production deployment (see example below)
+- [ ] Update the `rss.xml.js` file to include proper title, description, etc.
 
 ## Build Status
 
