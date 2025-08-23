@@ -49,7 +49,7 @@ npx @astrojs/upgrade
 
 ## Netlify Header Configuration
 
-An example netlify header configuration for production use: 
+An example netlify header configuration for production use:
 
 ```toml
 # Security + caching headers
