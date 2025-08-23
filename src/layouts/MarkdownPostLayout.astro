@@ -43,7 +43,13 @@ const pubISO = iso(pubDate);
 const updISO = iso(updatedDate);
 ---
 
-<BaseLayout pageTitle={title}>
+<BaseLayout
+	pageTitle={title}
+	pageDescription={description}
+	pageType="article"
+	pageImage={image}
+	pageImageAlt={imageAlt}
+>
 	<article
 		class="mx-auto max-w-prose px-5"
 		aria-labelledby="page-title"
