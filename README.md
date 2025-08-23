@@ -10,6 +10,8 @@ An Astro website
 - [ ] Remove SVG from Git LFS tracking
 - [ ] Setup Netlify headers in `netlify.toml` before production deployment (see example below)
 - [ ] Update the `rss.xml.js` file to include proper title, description, etc.
+- [ ] Add skip to content link 
+
 
 ## Build Status
 
