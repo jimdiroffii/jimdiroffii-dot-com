@@ -11,6 +11,7 @@ An Astro website
 - [ ] Setup Netlify headers in `netlify.toml` before production deployment (see example below)
 - [ ] Update the `rss.xml.js` file to include proper title, description, etc.
 - [ ] Add skip to content link
+- [ ] Setup Playwright testing platform (issues with Debian/LMDE installation)
 
 ## Build Status
 

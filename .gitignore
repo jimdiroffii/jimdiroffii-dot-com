@@ -383,3 +383,9 @@ $RECYCLE.BIN/
 
 # Local copy of a tree file
 tree.txt
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
