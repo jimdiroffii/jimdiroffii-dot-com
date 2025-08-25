@@ -32,6 +32,7 @@ const regular = all.filter((p) => typeof p.data.featuredRank !== "number");
 ---
 
 <BaseLayout pageTitle={pageTitle}>
+	<h1 id="page-title" class="font-bold text-4xl m-5">{pageTitle}</h1>
 	{
 		featured.length > 0 && (
 			<section aria-labelledby="featured-heading" class="mb-8">

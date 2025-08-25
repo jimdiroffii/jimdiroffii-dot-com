@@ -1,0 +1,160 @@
+---
+// src/components/DecorativeKeyboardSimple.astro
+// Phase 1: layout-only, no Tailwind @apply to avoid module issues.
+---
+
+<div aria-hidden="true" class="mx-auto w-[min(92vw,64rem)]">
+  <div class="rounded-xl border p-2">
+    <div class="kb-grid">
+      <!-- Row 1 -->
+      <div class="key u-1">~</div>
+      <div class="key u-1">1</div>
+      <div class="key u-1">2</div>
+      <div class="key u-1">3</div>
+      <div class="key u-1">4</div>
+      <div class="key u-1">5</div>
+      <div class="key u-1">6</div>
+      <div class="key u-1">7</div>
+      <div class="key u-1">8</div>
+      <div class="key u-1">9</div>
+      <div class="key u-1">0</div>
+      <div class="key u-1">-</div>
+      <div class="key u-1">=</div>
+      <div class="key u-2">Backspace</div>
+
+      <!-- Row 2 -->
+      <div class="key u-1_5">Tab</div>
+      <div class="key u-1">Q</div>
+      <div class="key u-1">W</div>
+      <div class="key u-1">E</div>
+      <div class="key u-1">R</div>
+      <div class="key u-1">T</div>
+      <div class="key u-1">Y</div>
+      <div class="key u-1">U</div>
+      <div class="key u-1">I</div>
+      <div class="key u-1">O</div>
+      <div class="key u-1">P</div>
+      <div class="key u-1">[</div>
+      <div class="key u-1">]</div>
+      <div class="key u-1_5">\</div>
+
+      <!-- Row 3 -->
+      <div class="key u-1_75">Caps</div>
+      <div class="key u-1">A</div>
+      <div class="key u-1">S</div>
+      <div class="key u-1">D</div>
+      <div class="key u-1">F</div>
+      <div class="key u-1">G</div>
+      <div class="key u-1">H</div>
+      <div class="key u-1">J</div>
+      <div class="key u-1">K</div>
+      <div class="key u-1">L</div>
+      <div class="key u-1">;</div>
+      <div class="key u-1">'</div>
+      <div class="key u-2_25">Enter</div>
+
+      <!-- Row 4 -->
+      <div class="key u-2_25">Shift</div>
+      <div class="key u-1">Z</div>
+      <div class="key u-1">X</div>
+      <div class="key u-1">C</div>
+      <div class="key u-1">V</div>
+      <div class="key u-1">B</div>
+      <div class="key u-1">N</div>
+      <div class="key u-1">M</div>
+      <div class="key u-1">,</div>
+      <div class="key u-1">.</div>
+      <div class="key u-1">/</div>
+      <div class="key u-2_75">Shift</div>
+
+      <!-- Row 5 -->
+      <div class="key u-1_25">Fn</div>
+      <div class="key u-1_25">Ctrl</div>
+      <div class="key u-1_25">Win</div>
+      <div class="key u-1_25">Alt</div>
+      <div class="key u-6_25">Space</div>
+      <div class="key u-1_25">Alt</div>
+      <div class="key u-1_25">Menu</div>
+      <div class="key u-1_25">Ctrl</div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Grid: 60 tracks (4 per 1u). Plain CSS so no Tailwind @apply is required. */
+  .kb-grid {
+    display: grid;
+    grid-template-columns: repeat(60, minmax(0, 1fr));
+    gap: 0.25rem; /* ~ Tailwind gap-1 */
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* Minimal, legible key baseline — no responsive variants */
+  .key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.25rem;               /* keep */
+  border: 1px solid #d4d4d4;
+  border-radius: 0.375rem;
+  background: #fff;
+  color: #262626;
+
+  container-type: inline-size;
+
+  /* responsive padding: shrinks on tiny keys, never exceeds 0.25rem */
+  padding-inline: clamp(0.08rem, 1cqw, 0.25rem);
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  line-height: 1;
+
+  /* per-key scaling; more conservative than before */
+  font-size: clamp(0.3125rem, min(2.25cqw, 62cqh), 0.875rem);
+  font-weight: 500;
+  }
+
+  /* Unit widths (1u = 4 tracks) */
+  .u-1 {
+    grid-column: span 4 / span 4;
+  }
+  .u-1_25 {
+    grid-column: span 5 / span 5;
+  }
+  .u-1_5 {
+    grid-column: span 6 / span 6;
+  }
+  .u-1_75 {
+    grid-column: span 7 / span 7;
+  }
+  .u-2 {
+    grid-column: span 8 / span 8;
+  }
+  .u-2_25 {
+    grid-column: span 9 / span 9;
+  }
+  .u-2_75 {
+    grid-column: span 11 / span 11;
+  }
+  .u-6_25 {
+    grid-column: span 25 / span 25;
+  }
+
+  /* Fallback when container query units aren’t supported */
+@supports not (font-size: 1cqw) {
+  .key {
+    padding-inline: 0.125rem;
+    font-size: clamp(0.3125rem, 2.25vw, 0.875rem);
+  }
+}
+
+/* Micro-tuning for very small keys */
+@container (max-width: 38px) {
+  .key { letter-spacing: -0.01em; }
+}
+@container (max-width: 32px) {
+  .key { letter-spacing: -0.02em; }
+}
+</style>

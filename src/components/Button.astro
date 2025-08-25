@@ -1,0 +1,10 @@
+---
+interface Props {
+    label: string;
+}
+
+const { label } = Astro.props;
+
+---
+
+<button class="m-1 p-3 bg-amber-500 dark:bg-amber-900 rounded-lg hover:bg-amber-500/80 dark:hover:bg-amber-900/80">{label}</button>
