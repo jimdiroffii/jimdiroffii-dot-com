@@ -1,8 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Keyboard from "../components/Keyboard.astro";
+
+const pageTitle: string = "Test Page";
 ---
 
-<BaseLayout>
+<BaseLayout pageTitle={pageTitle}>
 	<Keyboard />
 </BaseLayout>
