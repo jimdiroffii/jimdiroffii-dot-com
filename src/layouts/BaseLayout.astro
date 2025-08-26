@@ -1,0 +1,66 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+type Props = {
+  pageTitle: string;
+};
+
+const { pageTitle } = Astro.props as Props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <!-- TODO: Update robots to follow and index for production -->
+    <meta name="robots" content="nofollow, noindex" />
+    <meta name="googlebot" content="noindex, nofollow" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta name="referrer" content="strict-origin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <meta name="color-scheme" content="dark light" />
+    <meta
+      name="theme-color"
+      content="#ffffff"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#000000"
+      media="(prefers-color-scheme: dark)"
+    />
+
+    <title>{pageTitle}</title>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Jim Diroff II | Blog"
+      href={new URL("rss.xml", Astro.site)}
+    />
+
+    <!-- TODO: Complete Open Graph tags -->
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:image" content="/og-image.jpg" />
+  </head>
+  <body
+    class="container max-w-6xl mx-auto bg-white dark:bg-black text-black dark:text-white transition-colors duration-500"
+  >
+    <Header />
+    <main class="mx-2">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

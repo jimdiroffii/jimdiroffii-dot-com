@@ -1,0 +1,20 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import ScrollToTopButton from "../components/ScrollToTopButton.astro";
+
+interface Frontmatter {
+    title: string;
+}
+
+const { frontmatter } = Astro.props as { frontmatter: Frontmatter };
+
+const { title } = frontmatter ?? {};
+---
+
+<BaseLayout pageTitle={title}>
+    <article>
+        <slot />
+    </article>
+
+    <ScrollToTopButton />
+</BaseLayout>
