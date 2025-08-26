@@ -11,3 +11,37 @@
 :root.dark {
   color-scheme: dark;
 }
+
+/***
+ * Font Styles
+ */
+
+.sixtyfour-convergence-branding {
+  font-family: "Sixtyfour Convergence", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "BLED" 0, /* 0 - 100 */
+    "SCAN" -11, /* -53 - 100 */
+    "XELA" -51, /* -100 - 100 */
+    "YELA" -29; /* -100 - 100; */
+}
+
+.sixtyfour-convergence-nav {
+  font-family: "Sixtyfour Convergence", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "BLED" 0, /* 0 - 100 */
+    "SCAN" -11, /* -53 - 100 */
+    "XELA" -51, /* -100 - 100 */
+    "YELA" -29; /* -100 - 100; */
+}
+
+.noto-sans-warang-citi-regular {
+  font-family: "Noto Sans Warang Citi", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}

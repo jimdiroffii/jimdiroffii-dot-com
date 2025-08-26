@@ -57,7 +57,11 @@ if (typeof pageImage === "string") {
 		<meta name="robots" content="noindex, nofollow" />
 		<title>{pageTitle}</title>
 
-		{pageDescription && <meta name="description" content={pageDescription} />}
+		{
+			pageDescription && (
+				<meta name="description" content={pageDescription} />
+			)
+		}
 		{canonical && <link rel="canonical" href={canonical} />}
 
 		<!-- Open Graph -->
@@ -115,7 +119,8 @@ if (typeof pageImage === "string") {
 						return false;
 					case THEMES.SYSTEM:
 					default:
-						return window.matchMedia("(prefers-color-scheme: dark)").matches;
+						return window.matchMedia("(prefers-color-scheme: dark)")
+							.matches;
 				}
 			}
 
@@ -129,16 +134,18 @@ if (typeof pageImage === "string") {
 					document.documentElement.classList.remove("dark");
 				}
 
-				document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+				document.documentElement.style.colorScheme = isDark
+					? "dark"
+					: "light";
 
 				// Update meta theme-color for mobile browsers
 				const metaThemeColor = document.querySelector(
-					'meta[name="theme-color"]'
+					'meta[name="theme-color"]',
 				);
 				if (metaThemeColor) {
 					metaThemeColor.setAttribute(
 						"content",
-						isDark ? "#000000" : "#ffffff"
+						isDark ? "#000000" : "#ffffff",
 					);
 				}
 
@@ -167,7 +174,7 @@ if (typeof pageImage === "string") {
 									preference: currentPreference,
 									isDark: e.matches,
 								},
-							})
+							}),
 						);
 					}
 				});
@@ -188,7 +195,7 @@ if (typeof pageImage === "string") {
 								preference: newPreference,
 								isDark,
 							},
-						})
+						}),
 					);
 				},
 				THEMES,
@@ -197,9 +204,20 @@ if (typeof pageImage === "string") {
 
 		<!-- Add theme-color meta tag for mobile browsers -->
 		<meta name="theme-color" content="#ffffff" />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence:BLED,SCAN,XELA,YELA@0..100,-53..100,-100..100,-100..100&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Noto+Sans+Warang+Citi&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body
-		class=" bg-white dark:bg-black text-black dark:text-white transition-colors duration-200"
+		class="noto-sans-warang-citi-regular bg-white dark:bg-black text-black dark:text-white transition-colors duration-200"
 	>
 		<Header />
 		<main class="container flex flex-col mx-auto max-w-3xl">
