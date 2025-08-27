@@ -1,3 +1,15 @@
+<script context="module" lang="ts">
+    export type AvatarAttrs = {
+        alt: string;
+        src: string;
+        srcset?: string;
+        width?: number;
+        height?: number;
+        loading?: "lazy" | "eager";
+        decoding?: "async" | "sync" | "auto";
+    };
+</script>
+
 <script lang="ts">
     import { onMount } from "svelte";
 
@@ -5,7 +17,7 @@
         name: string;
         position: string;
         testimonial: string;
-        profileImage: string;
+        profileImage: AvatarAttrs;
     }
 
     export let testimonials: Testimonial[] = [];
@@ -91,8 +103,13 @@
                 <!-- Fixed position for profile and navigation -->
                 <figcaption class="mt-4">
                     <img
-                        src={currentTestimonial.profileImage}
-                        alt={currentTestimonial.name}
+                        src={currentTestimonial.profileImage.src}
+                        srcset={currentTestimonial.profileImage.srcset}
+                        width={currentTestimonial.profileImage.width}
+                        height={currentTestimonial.profileImage.height}
+                        loading={currentTestimonial.profileImage.loading}
+                        decoding={currentTestimonial.profileImage.decoding}
+                        alt={currentTestimonial.profileImage.alt}
                         class="mx-auto size-40 rounded-full object-cover shadow-lg"
                     />
                     <div class="mt-4 flex flex-col items-center">
