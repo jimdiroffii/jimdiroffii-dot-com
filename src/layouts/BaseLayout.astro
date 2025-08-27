@@ -55,11 +55,13 @@ const { pageTitle } = Astro.props as Props;
     <meta property="og:image" content="/og-image.jpg" />
   </head>
   <body
-    class="container max-w-6xl mx-auto bg-white dark:bg-black text-black dark:text-white transition-colors duration-500"
+    class="font-family container max-w-6xl mx-auto bg-white dark:bg-black text-black dark:text-white transition-colors duration-500"
   >
     <Header />
     <main class="mx-2">
+      <div class="mt-2">
       <slot />
+      </div>
     </main>
     <Footer />
   </body>
