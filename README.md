@@ -1,6 +1,6 @@
 # jimdiroffii-dot-com
 
-An Astro website
+An Astro website - Current live build is on `simple-design` branch.
 
 ## TODO
 
