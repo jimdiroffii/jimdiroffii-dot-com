@@ -5,9 +5,43 @@ import Footer from "../components/Footer.astro";
 
 type Props = {
   pageTitle: string;
+  pageDescription?: string;
+  /** Absolute URL string OR ImageMetadata from astro:assets */
+  pageImage?: string | ImageMetadata;
+  pageImageAlt?: string;
+  /** Default "website"; use "article" on posts */
+  pageType?: "website" | "article";
 };
 
-const { pageTitle } = Astro.props as Props;
+const {
+  pageTitle,
+  pageDescription = "Personal portfolio and security blog for Jim Diroff II",
+  pageImage,
+  pageImageAlt = "",
+  pageType = "website",
+} = Astro.props as Props;
+
+// const canonical = Astro.site
+// 	? new URL(Astro.url.pathname, Astro.site).toString()
+// 	: undefined;
+
+function absoluteUrl(u?: string): string | undefined {
+  if (!u || !Astro.site) return undefined;
+  try {
+    return new URL(u, Astro.site).toString();
+  } catch {
+    return undefined;
+  }
+}
+
+let ogImage: string | undefined;
+if (typeof pageImage === "string") {
+  ogImage = absoluteUrl(pageImage);
+} else if (pageImage?.src) {
+  ogImage = Astro.site
+    ? new URL(pageImage.src, Astro.site).toString()
+    : undefined;
+}
 ---
 
 <!doctype html>
@@ -40,6 +74,7 @@ const { pageTitle } = Astro.props as Props;
     <title>{pageTitle}</title>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={Astro.url} />
 
     <link
       rel="alternate"
@@ -48,20 +83,30 @@ const { pageTitle } = Astro.props as Props;
       href={new URL("rss.xml", Astro.site)}
     />
 
+    {pageDescription && <meta name="description" content={pageDescription} />}
+
     <!-- TODO: Complete Open Graph tags -->
     <meta property="og:title" content={pageTitle} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={pageType} />
     <meta property="og:url" content={Astro.url} />
-    <meta property="og:image" content="/og-image.jpg" />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {
+      ogImage && pageImageAlt && (
+        <meta property="og:image:alt" content={pageImageAlt} />
+      )
+    }
+    {
+      pageDescription && (
+        <meta property="og:description" content={pageDescription} />
+      )
+    }
   </head>
   <body
     class="font-family container max-w-6xl mx-auto bg-white dark:bg-black text-black dark:text-white transition-colors duration-500"
   >
     <Header />
-    <main class="mx-2">
-      <div class="mt-2">
+    <main class="mx-2 mt-2">
       <slot />
-      </div>
     </main>
     <Footer />
   </body>
