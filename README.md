@@ -4,7 +4,7 @@ An Astro website - Current live build is on `simple-design` branch.
 
 ## TODO
 
-- [ ] Modify `robots.txt.ts` to allow indexing (automatically generates robots file)
+- [x] Modify `robots.txt.ts` to allow indexing (automatically generates robots file)
 - [ ] Modify meta robots tag in `BaseLayout.astro` to allow indexing
 - [ ] Update production URL domain in `astro.config.mjs`
 - [ ] Remove SVG from Git LFS tracking
