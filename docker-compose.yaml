@@ -1,0 +1,15 @@
+services:
+  astro:
+    image: node:lts-alpine
+    container_name: my_astro_site_dev
+    command: npm run dev -- --host
+    working_dir: /app
+    ports:
+      - "4321:4321"
+    volumes:
+      - ${PROJECT_PATH}:/app
+      - node_modules_volume:/app/node_modules
+    tty: true
+
+volumes:
+  node_modules_volume:
