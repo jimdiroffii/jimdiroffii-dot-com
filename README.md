@@ -6,21 +6,6 @@ My personal portfolio and blog site. Currently under development.
 
 Astro 5, Tailwind CSS 4, Svelte 5. Hosted on Netlify.
 
-## Docker Development
-
-First time installation, populate `node_modules` by running:
-
-```
-docker compose run --rm astro npm install
-```
-
-Future runs can be run with standard compose:
-
-```
-docker compose up -d
-```
-
-
 ## Contact
 
 Hit me up on any of the social sites: @jimdiroffii
