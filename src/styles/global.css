@@ -9,3 +9,9 @@
 :root {
   color-scheme: light dark;
 }
+
+/* Override the appearance of ligatures (fi) */
+body {
+  font-variant-ligatures: none;
+}
+
