@@ -1,22 +1,21 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig } from 'astro/config';
 
-import netlify from "@astrojs/netlify";
+import tailwindcss from '@tailwindcss/vite';
 
-import preact from "@astrojs/preact";
+import sitemap from '@astrojs/sitemap';
 
-import tailwindcss from "@tailwindcss/vite";
+import netlify from '@astrojs/netlify';
 
-import sitemap from "@astrojs/sitemap";
-
-import featuredGuard from "./plugins/featured-guard";
+import svelte from '@astrojs/svelte';
 
 export default defineConfig({
-  site: "https://jimdiroffii-dot-com.netlify.app/",
-  adapter: netlify(),
-  integrations: [preact(), sitemap()],
+  site: 'https://www.jimdiroffii.com/',
 
   vite: {
-    plugins: [tailwindcss(), featuredGuard()],
+    plugins: [tailwindcss()]
   },
+
+  integrations: [sitemap(), svelte()],
+  adapter: netlify()
 });

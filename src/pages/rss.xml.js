@@ -1,6 +1,8 @@
 import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
 
+// TODO: Output full text to RSS feed for blog posts
+
 export async function GET(context) {
   const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),

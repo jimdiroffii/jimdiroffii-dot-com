@@ -1,80 +1,121 @@
-# jimdiroffii-dot-com
+# JimDiroffII.com
 
-An Astro website - Current live build is on `simple-design` branch.
+My personal portfolio and blog site. Currently under development.
 
-## TODO
+## Stack
 
-- [x] Modify `robots.txt.ts` to allow indexing (automatically generates robots file)
-- [ ] Modify meta robots tag in `BaseLayout.astro` to allow indexing
-- [ ] Update production URL domain in `astro.config.mjs`
-- [ ] Remove SVG from Git LFS tracking
-- [ ] Setup Netlify headers in `netlify.toml` before production deployment (see example below)
-- [ ] Update the `rss.xml.js` file to include proper title, description, etc.
-- [ ] Add skip to content link
-- [ ] Setup Playwright testing platform (issues with Debian/LMDE installation)
+Astro 5, Tailwind CSS 4, Svelte 5. Hosted on Netlify.
 
-## Build Status
+## Contact
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/63b7ed2f-2996-4d5b-ae9a-628ab9a2f800/deploy-status)](https://app.netlify.com/projects/jimdiroffii-dot-com/deploys)
+Hit me up on any of the social sites: @jimdiroffii
 
-## Binary File Handling
+## TODO List
 
-Ensure binary files are handled through [git lfs](https://git-lfs.com/).
+### Completed Items
 
-- Install git lfs package: `apt install git-lfs`
-- Setup the package: `git lfs install`
-- Track files: `git lfs track "*.ext"`
-- Commit git attributes: `git add .gitattributes`
+[x] Setup Netlify CI/CD build pipeline (simple-design branch)
+[x] RSS Feed
+[x] Automatic sitemap generation
+[x] Setup Astro 5
+[x] Setup Tailwind CSS
+[x] Setup Svelte
+[x] Setup Git LFS
+[x] Build content collection for blog posts
+[x] Automatic dark theme toggling
+[x] Automatic robots generation with disallow entry
+[x] Layout: Base
+[x] Basic components
+[x] Testimonial slider
+[x] Image to AVIF with WEBP and JPG fallback
 
-### Track previously committed files and rebase with signature
+### Content & IA
 
-**This is a destructive action that rewrites the commit history**
+[ ] Home page section: Introduction
+[ ] Home page section: Companies
+[ ] Point of sale stuff (case study series)
+[ ] Projects (security tools, pipelines, NAS/CI, etc.)
+[ ] CTF index (filters; links to writeups)
+[ ] About (timeline, certs, NASA L’SPACE)
+[ ] Resume link
+[ ] Upload previously written blog posts
+[ ] Upload CTF markdown files
 
-- Track the file that was not included in `lfs`: `git lfs migrate import --everything --include="favicon.svg"`
+### Writing UX & Markdown (Astro Content + MDX)
 
-The `rebase` operation can be performed from the first commit where the imported file was committed, or from the root commit. Without `rebase`, all GPG signatures of rewritten commits become invalid.
+[ ] Markdown post formatting
+[ ] Improved Blog (markdown) post layout (TOC, reading time, prev/next, series)
+[ ] Syntax highlighting
+[ ] Copy button on code blocks
+[ ] Footnotes with backrefs
 
-- Rebase from root: `git rebase --exec 'git commit --amend --no-edit -S' --root`
-- Rebase from commit: `git rebase --exec 'git commit --amend --no-edit -S' -i <commit hash>`
+### Design & Brand
 
-The next push has to be forced since the commit history changed. Other copies of the repository will need to be cloned or rebased again.
+[ ] Branding logo (SVG; light/dark variants)
+[ ] Favicon set + maskable PWA icon
+[ ] Typography and Font selection
+[ ] Color palette (WCAG AA)
+[ ] OG/social image template
+[ ] 404 & 410 pages
+[ ] Print styles for posts
 
-- Force push: `git push --force`
+### Navigation & Search
 
-The new commits should have been written, and GPG signatures verified.
+[ ] Hamburger mobile nav menu
+[ ] Skip links & landmark regions
+[ ] Breadcrumbs on posts/case studies (schema.org)
+[ ] Client-side search
+[ ] Footer quick links
 
-## Upgrading Astro and integrations
+### Accessibility (a11y) Testing
 
-Upgrade to the latest version of Astro, and upgrade all integrations to their latest versions.
+[ ] a11y improvements and testing
+[ ] Keyboard tab order & visible focus states
+[ ] Color contrast audit
+[ ] Reduced-motion variants for animations
+[ ] Form labels, descriptions, and error messaging
+[ ] Automated checks in CI (axe, Lighthouse, Pa11y)
 
-```
-npx @astrojs/upgrade
-```
+### Performance & Media
 
-## Netlify Header Configuration
+[ ] Lazy-load images/iframes; `decoding="async"`; `fetchpriority` where needed
+[ ] Tailwind JIT purge; keep JS budget minimal (islands only)
+[ ] Preload local font subset + critical path CSS
+[ ] Throttled mobile testing
 
-An example netlify header configuration for production use:
+### SEO & Feeds
 
-```toml
-# Security + caching headers
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Content-Type-Options = "nosniff"
-    X-Frame-Options = "DENY"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+[ ] Finalize titles, meta, and canonicals
+[ ] RSS/Atom + JSON Feed (global & per-tag)
+[ ] schema.org (Person/Organization, BlogPosting, BreadcrumbList)
+[ ] Verify Search Console + Bing
 
-# Cache hashed build assets aggressively (Astro emits /_astro/* by default)
-[[headers]]
-  for = "/_astro/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-```
+### Contact & Newsletter
 
-## Dark mode behavior
+[ ] Contact form
+[ ] Spam protection
+[ ] Rate limiting + structured logging
 
-- Theme is applied pre-paint via an inline script. Explicit user choices (`light`/`dark`) override system.
-- In “system” mode the site follows `prefers-color-scheme` when the browser exposes live updates.
-- Some Firefox themes and privacy forks can pin native widget appearance or `prefers-color-scheme`.
+### Privacy, Security & Legal
+
+[ ] Security headers via Netlify `_headers` (CSP w/ nonces, HSTS, Referrer-Policy, Permissions-Policy, X-Frame-Options)
+[ ] No third-party trackers; local fonts only
+[ ] Privacy policy
+[ ] Terms of use
+[ ] Accessibility statement
+[ ] Content license for blog/code snippets
+
+### Build, CI/CD & Ops (Netlify)
+
+[ ] Branch previews + protected main
+[ ] Link checker (lychee) + Markdownlint/Prettier/ESLint
+[ ] Verify image optimization in build
+[ ] Dependabot/security scanning
+[ ] Uptime/TLS monitors; backups of content & artifacts
+[ ] Error tracking
+
+### Basic Analytics
+
+[ ] Plausible/Umami (self-hosted or no-cookie mode)
+[ ] Goals: contact submit, resume download, read-depth
+[ ] Lighthouse score tracking in CI

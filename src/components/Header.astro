@@ -1,68 +1,12 @@
 ---
 import Branding from "./Branding.astro";
-import Hamburger from "./Hamburger.astro";
+import Construction from "./Construction.astro";
 import Navigation from "./Navigation.astro";
-import ThemeToggle from "./ThemeToggle.astro";
 ---
 
-<header
-	class="bg-white dark:bg-black border-b border-black/10 dark:border-white/15 transition-colors duration-200"
->
-	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-		<div class="flex items-center justify-between h-16">
-			<div class="absolute">
-				<Branding siteName="JIM DIROFF II" />
-			</div>
-			<div class="flex items-center">
-				<Hamburger />
-			</div>
-
-			<nav class="hidden md:block">
-				<Navigation />
-			</nav>
-
-			<div class="flex items-center space-x-4">
-				<ThemeToggle />
-			</div>
-		</div>
-	</div>
-
-	<!-- Mobile navigation -->
-	<div class="md:hidden">
-		<Navigation />
-	</div>
+<header class="p-2 border-b border-black/10 dark:border-white/10 flex justify-between items-center">
+    <Branding />
+    <!-- TODO: Remove Under Construction -->
+    <Construction />
+    <Navigation />
 </header>
-
-<script>
-	const hamburger = document.querySelector(".hamburger");
-	const navLinks = document.querySelector(".nav-links");
-
-	hamburger?.addEventListener("click", () => {
-		navLinks?.classList.toggle("expanded");
-
-		const isExpanded = navLinks?.classList.contains("expanded");
-
-		// Safely convert the state to a string ("true" or "false")
-		// 1. Boolean(isExpanded) converts true -> true; false/undefined -> false
-		// 2. String(...) converts the boolean result to the required string
-		const newAriaExpandedState = String(Boolean(isExpanded));
-
-		hamburger?.setAttribute("aria-expanded", newAriaExpandedState);
-	});
-</script>
-
-<style>
-	header :global(.nav-links) {
-		display: none;
-	}
-
-	header :global(.nav-links.expanded) {
-		display: unset;
-	}
-
-	@media screen and (min-width: 636px) {
-		header :global(.nav-links) {
-			display: block;
-		}
-	}
-</style>

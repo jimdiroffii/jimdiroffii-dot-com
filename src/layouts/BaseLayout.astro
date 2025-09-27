@@ -1,228 +1,113 @@
 ---
+import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import type { ImageMetadata } from "astro";
-import "../styles/global.css";
 
 type Props = {
-	pageTitle: string;
-	pageDescription?: string;
-	/** Absolute URL string OR ImageMetadata from astro:assets */
-	pageImage?: string | ImageMetadata;
-	pageImageAlt?: string;
-	/** Default "website"; use "article" on posts */
-	pageType?: "website" | "article";
+  pageTitle: string;
+  pageDescription?: string;
+  /** Absolute URL string OR ImageMetadata from astro:assets */
+  pageImage?: string | ImageMetadata;
+  pageImageAlt?: string;
+  /** Default "website"; use "article" on posts */
+  pageType?: "website" | "article";
 };
 
 const {
-	pageTitle,
-	pageDescription = "Personal portfolio and security blog.",
-	pageImage,
-	pageImageAlt = "",
-	pageType = "website",
+  pageTitle,
+  pageDescription = "Personal portfolio and security blog for Jim Diroff II",
+  pageImage,
+  pageImageAlt = "",
+  pageType = "website",
 } = Astro.props as Props;
 
-const canonical = Astro.site
-	? new URL(Astro.url.pathname, Astro.site).toString()
-	: undefined;
+// const canonical = Astro.site
+// 	? new URL(Astro.url.pathname, Astro.site).toString()
+// 	: undefined;
 
 function absoluteUrl(u?: string): string | undefined {
-	if (!u || !Astro.site) return undefined;
-	try {
-		return new URL(u, Astro.site).toString();
-	} catch {
-		return undefined;
-	}
+  if (!u || !Astro.site) return undefined;
+  try {
+    return new URL(u, Astro.site).toString();
+  } catch {
+    return undefined;
+  }
 }
 
 let ogImage: string | undefined;
 if (typeof pageImage === "string") {
-	ogImage = absoluteUrl(pageImage);
+  ogImage = absoluteUrl(pageImage);
 } else if (pageImage?.src) {
-	ogImage = Astro.site
-		? new URL(pageImage.src, Astro.site).toString()
-		: undefined;
+  ogImage = Astro.site
+    ? new URL(pageImage.src, Astro.site).toString()
+    : undefined;
 }
 ---
 
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="sitemap" href="/sitemap-index.xml" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
-		<!-- TODO: Remove the robots directive when ready to go live -->
-		<meta name="robots" content="noindex, nofollow" />
-		<title>{pageTitle}</title>
+    <!-- TODO: Update robots to follow and index for production -->
+    <meta name="robots" content="nofollow, noindex" />
+    <meta name="googlebot" content="noindex, nofollow" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
-		{
-			pageDescription && (
-				<meta name="description" content={pageDescription} />
-			)
-		}
-		{canonical && <link rel="canonical" href={canonical} />}
+    <meta name="referrer" content="strict-origin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
 
-		<!-- Open Graph -->
-		<meta property="og:title" content={pageTitle} />
-		{
-			pageDescription && (
-				<meta property="og:description" content={pageDescription} />
-			)
-		}
-		{canonical && <meta property="og:url" content={canonical} />}
-		<meta property="og:type" content={pageType} />
-		{ogImage && <meta property="og:image" content={ogImage} />}
-		{
-			ogImage && pageImageAlt && (
-				<meta property="og:image:alt" content={pageImageAlt} />
-			)
-		}
+    <meta name="color-scheme" content="dark light" />
+    <meta
+      name="theme-color"
+      content="#ffffff"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#000000"
+      media="(prefers-color-scheme: dark)"
+    />
 
-		<!-- Twitter -->
-		<meta
-			name="twitter:card"
-			content={ogImage ? "summary_large_image" : "summary"}
-		/>
-		<meta name="twitter:title" content={pageTitle} />
-		{
-			pageDescription && (
-				<meta name="twitter:description" content={pageDescription} />
-			)
-		}
-		{ogImage && <meta name="twitter:image" content={ogImage} />}
+    <title>{pageTitle}</title>
 
-		<script is:inline>
-			// Theme management with system preference support
-			const THEME_KEY = "theme-preference";
-			const THEMES = {
-				LIGHT: "light",
-				DARK: "dark",
-				SYSTEM: "system",
-			};
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={Astro.url} />
 
-			// Get the user's theme preference
-			function getThemePreference() {
-				const stored = localStorage.getItem(THEME_KEY);
-				return stored && Object.values(THEMES).includes(stored)
-					? stored
-					: THEMES.SYSTEM;
-			}
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Jim Diroff II | Blog"
+      href={new URL("rss.xml", Astro.site)}
+    />
 
-			// Determine if dark mode should be active
-			function shouldUseDarkMode(preference) {
-				switch (preference) {
-					case THEMES.DARK:
-						return true;
-					case THEMES.LIGHT:
-						return false;
-					case THEMES.SYSTEM:
-					default:
-						return window.matchMedia("(prefers-color-scheme: dark)")
-							.matches;
-				}
-			}
+    {pageDescription && <meta name="description" content={pageDescription} />}
 
-			// Apply the theme to the document
-			function applyTheme(preference) {
-				const isDark = shouldUseDarkMode(preference);
-
-				if (isDark) {
-					document.documentElement.classList.add("dark");
-				} else {
-					document.documentElement.classList.remove("dark");
-				}
-
-				document.documentElement.style.colorScheme = isDark
-					? "dark"
-					: "light";
-
-				// Update meta theme-color for mobile browsers
-				const metaThemeColor = document.querySelector(
-					'meta[name="theme-color"]',
-				);
-				if (metaThemeColor) {
-					metaThemeColor.setAttribute(
-						"content",
-						isDark ? "#000000" : "#ffffff",
-					);
-				}
-
-				return isDark;
-			}
-
-			// Initialize theme immediately to prevent flash
-			const initialPreference = getThemePreference();
-			//const initialIsDark = applyTheme(initialPreference);
-
-			// Save the preference if it wasn't explicitly set
-			localStorage.setItem(THEME_KEY, initialPreference);
-
-			// Listen for system theme changes
-			window
-				.matchMedia("(prefers-color-scheme: dark)")
-				.addEventListener("change", (e) => {
-					const currentPreference = getThemePreference();
-					// Only respond to system changes when in system mode
-					if (currentPreference === THEMES.SYSTEM) {
-						applyTheme(currentPreference);
-						// Dispatch custom event for components to listen to
-						window.dispatchEvent(
-							new CustomEvent("theme-changed", {
-								detail: {
-									preference: currentPreference,
-									isDark: e.matches,
-								},
-							}),
-						);
-					}
-				});
-
-			// Make theme functions available globally for components
-			window.themeManager = {
-				getPreference: getThemePreference,
-				setPreference: (newPreference) => {
-					if (!Object.values(THEMES).includes(newPreference)) return;
-
-					localStorage.setItem(THEME_KEY, newPreference);
-					const isDark = applyTheme(newPreference);
-
-					// Dispatch event for components
-					window.dispatchEvent(
-						new CustomEvent("theme-changed", {
-							detail: {
-								preference: newPreference,
-								isDark,
-							},
-						}),
-					);
-				},
-				THEMES,
-			};
-		</script>
-
-		<!-- Add theme-color meta tag for mobile browsers -->
-		<meta name="theme-color" content="#ffffff" />
-
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence:BLED,SCAN,XELA,YELA@0..100,-53..100,-100..100,-100..100&display=swap"
-			rel="stylesheet"
-		/>
-		<link
-			href="https://fonts.googleapis.com/css2?family=Noto+Sans+Warang+Citi&display=swap"
-			rel="stylesheet"
-		/>
-	</head>
-	<body
-		class="noto-sans-warang-citi-regular bg-white dark:bg-black text-black dark:text-white transition-colors duration-200"
-	>
-		<Header />
-		<main class="container flex flex-col mx-auto max-w-3xl">
-			<slot />
-		</main>
-		<Footer />
-	</body>
+    <!-- TODO: Complete Open Graph tags -->
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:type" content={pageType} />
+    <meta property="og:url" content={Astro.url} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {
+      ogImage && pageImageAlt && (
+        <meta property="og:image:alt" content={pageImageAlt} />
+      )
+    }
+    {
+      pageDescription && (
+        <meta property="og:description" content={pageDescription} />
+      )
+    }
+  </head>
+  <body
+    class="font-family container max-w-6xl mx-auto bg-white dark:bg-black text-black dark:text-white transition-colors duration-500"
+  >
+    <Header />
+    <main class="mx-2 mt-2">
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>

@@ -1,0 +1,40 @@
+---
+
+---
+
+<button
+    id="scrollToTopBtn"
+    class="font-extrabold fixed bottom-5 right-5 p-2 bg-blue-700 text-white dark:text-black rounded-full drop-shadow-2xl hover:scale-120 transition-transform duration-500 opacity-80 hover:opacity-100"
+    title="Scroll to top"
+>
+    ↑
+</button>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+        function checkScroll() {
+            if (!scrollToTopBtn) return;
+            if (
+                document.body.scrollTop > 20 ||
+                document.documentElement.scrollTop > 20
+            ) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        }
+
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+
+        window.addEventListener("scroll", checkScroll);
+
+        if (scrollToTopBtn) {
+            scrollToTopBtn.addEventListener("click", topFunction);
+        }
+    });
+</script>

@@ -1,33 +1,80 @@
 ---
+import TestimonialSlider from "../components/TestimonialSlider.svelte";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Button from "../components/Button.astro";
-const pageTitle: string = "Home Page";
+
+const pageTitle: string = "Jim Diroff II | Home";
+
+// Import local images
+import ramonImage from "../assets/images/profile_picture_ramon_bourgeois.jpeg";
+import sonnyImage from "../assets/images/profile_picture_sonny_walters_old_wagon_saloon_grill.jpeg";
+import jameelImage from "../assets/images/profile_picture_jameel_shakir.jpeg";
+import { getImage } from "astro:assets";
+
+const AVATAR_PX = 96;
+
+const mkAvatar = async (file: ImageMetadata, alt: string) => {
+  const img = await getImage({
+    src: file,
+    width: AVATAR_PX,
+    height: AVATAR_PX,
+    layout: "fixed",
+    densities: [1, 2],
+    format: "avif",
+    quality: "mid",
+    fit: "cover",
+    position: "center",
+  });
+
+  return {
+    alt,
+    src: img.src,
+    srcset: img.srcSet.attribute,
+    width: img.attributes.width,
+    height: img.attributes.height,
+    loading: "lazy",
+    decoding: "async",
+  };
+};
+
+const testimonials = [
+  {
+    name: "Ramon Bourgeois",
+    position: "Regional Vice President of Operations",
+    testimonial: "Well respected by everyone, his can do attitude is contagious to everyone he works with. He is always available to help anyone regardless of how basic the question may be. He is an asset to any company and we are lucky to have him.",
+    // profileImage: "https://media.licdn.com/dms/image/v2/D4E03AQEOkyYP0U3K_Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1730672298595?e=1759363200&v=beta&t=MJqjIpRiSxf_FQvI3xBxdFD5US6nVQ-xaTZjK0WAZpY"
+    // profileImage: ramonImage.src
+    profileImage: await mkAvatar(ramonImage, "Ramon Bourgeois")
+  },
+  {
+    name: "Sonny Walters",
+    position: "Managing Partner",
+    testimonial: "Jim has been a solid \"go to\" guy when needed! My experience in working with Jim has always been positive and rewarding. Jim showed excellent organization skills while under pressure and it was a pleasure working with him.",
+    // profileImage: "https://media.licdn.com/dms/image/v2/D5603AQG-x2ndPUroPA/profile-displayphoto-shrink_800_800/B56ZUKm4NHHoAc-/0/1739639719188?e=1759363200&v=beta&t=ug7ZNG1vu5pVa3Bqpo7TuMF4wqByMOccx8F30tzbWnc"
+    // profileImage: sonnyImage.src
+    profileImage: await mkAvatar(sonnyImage, "Sonny Walters")
+  },
+  {
+    name: "Jameel Shakir",
+    position: "General Manager", 
+    testimonial: "Jim is a highly capable and knowledgeable individual who has helped me on several occasions. Very structured and organized and has ability to deliver great work and prioritizes well.",
+    // profileImage: "https://media.licdn.com/dms/image/v2/D5603AQFLL4rL-hpVQA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1683638545346?e=1759363200&v=beta&t=h4RSgHtQHiFytIp2XQwbeGPTxzamFPBcVKzgyRM02h0"
+    // profileImage: jameelImage.src
+    profileImage: await mkAvatar(jameelImage, "Jameel Shakir")
+  }
+];
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-	<section id="hero">
-		<h2 class="text-2xl text-center mt-5">Hello World! I'm</h2>
-		<h1 class="font-bold text-6xl text-center my-4">Jim Diroff II</h1>
+    <h2 class="text-l font-semibold text-center mt-4">Hello, world! I'm</h2>
+    <h1 class="text-4xl font-bold text-center mt-4">Jim Diroff II</h1>
+    <p class="text-center mt-4">Passionate technologist and lifelong learner.</p>
 
-		<p class="text-center">
-			My life-long passion for computers and technology drives me to
-			constantly learn and grow in this ever-changing field.
 
-			Invade my personal space where I discuss technology topics such as
-			programming, infrastructure and security.
-		</p>
 
-		<div class="flex justify-center flex-wrap mt-2">
-			<Button label="Latest Projects" />
-			<Button label="Contact Me" />
-			<Button label="Latest Writings" />
-		</div>
-	</section>
-	<section id="graphic">
-		<div
-			class="my-6 w-full h-60 border-3 border-gray-400 rounded-lg bg-gradient-to-br from-amber-700 via-gray-800 to-amber-900"
-		>
-		</div>
-	</section>
-	<section id="ticker"></section>
+    <TestimonialSlider
+        {testimonials}
+        autoPlay={true}
+        autoPlayDelay={60000}
+        client:load
+    />
 </BaseLayout>

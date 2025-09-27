@@ -1,0 +1,34 @@
+---
+export interface Props {
+  href: string;
+  ariaLabel: string;
+  svgPath: string;
+  viewBox?: string;
+  hoverColor?: string;
+}
+
+const { 
+  href, 
+  ariaLabel, 
+  svgPath, 
+  viewBox = "0 0 640 640",
+  hoverColor = "hover:text-gray-900 dark:hover:text-white"
+} = Astro.props;
+---
+
+<a 
+  href={href} 
+  target="_blank" 
+  rel="noopener noreferrer"
+  aria-label={ariaLabel}
+  class={`w-10 h-10 text-gray-600 dark:text-gray-400 ${hoverColor} transition-colors`}
+>
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox={viewBox} 
+    class="w-full h-full" 
+    fill="currentColor"
+  >
+    <path d={svgPath}></path>
+  </svg>
+</a>
