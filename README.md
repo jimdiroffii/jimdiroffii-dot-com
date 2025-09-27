@@ -5,6 +5,7 @@ My personal portfolio and blog site. Currently under development.
 ## Stack
 
 Astro 5, Tailwind CSS 4, Svelte 5. Hosted on Netlify.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/63b7ed2f-2996-4d5b-ae9a-628ab9a2f800/deploy-status)](https://app.netlify.com/projects/jimdiroffii-dot-com/deploys)
 
 ## Contact
 
