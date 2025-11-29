@@ -2,9 +2,26 @@
 interface Props {
     url: string;
     title: string;
+    description: string;
+    pubDate: string;
+    image: string;
 }
 
-const { url, title } = Astro.props;
+const { url, title, description, pubDate, image } = Astro.props;
 ---
 
-<li><a href={url}>{title}</a></li>
+<article class="group flex flex-col rounded-lg">
+    <a href={url} class="flex flex-col h-full">
+        <div class="relative overflow-hidden">
+            <img 
+                src={image} 
+            />
+        </div>
+
+        <div class="flex flex-1 flex-col mb-4">
+            <h2 class="text-2xl font-bold">{title}</h2>
+            <p class="text-gray-700 dark:text-gray-300">{description}</p>
+            <time class="text-sm text-gray-500 dark:text-gray-400">{new Date(pubDate).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+        </div>
+    </a>
+</article>
