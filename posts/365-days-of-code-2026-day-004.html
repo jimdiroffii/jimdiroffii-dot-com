@@ -41,68 +41,97 @@
 
 	<h3>List of things done today</h3>
 	<ul>
-		<li>Dockerize Time Tracker</li>
-		<li>Switched Default Shell to zsh</li>
+		<li>Setup MariaDB Container</li>
+		<li>Installed Monica Container</li>
+		<li>Brainstorm PRM Ideas</li>
+		<li>
+			Investigate Integer vs UUIDv4 vs UUIDv7 vs ULID for DB Primary Key
+		</li>
+		<li>
+			
+		</li>
 	</ul>
 
 	<article>
 		<p>
-			Day 3 was a little less productive for coding. I mostly did
-			administrative work to start the day. Working with docker,
-			working with shells, updating PCs, synchronizing files, etc. I
-			wanted to add another project to my Laravel tutorial. I
-			have been wanting a personal management system for a long time.
-			The only one I know of that exists is called Monica. It was ok,
-			and did what I needed it to do on a basic level. However, I was
-			not a fan of the interface. The developers were also not working
-			on the application full-time, while trying to migrate the entire
-			system over to a new version called Chandler. They have put in
-			a tremendous effort, but I think I can make one on my own.
+			I installed a new MariaDB container in my local server, to support
+			local databases. Primarily, I wanted to install Monica in a
+			container, and required a database to set up Monica. I ran into some
+			headaches when I could not log in as the root user into my new
+			database container. Turns out, I had previously installed MariaDB,
+			and had a persistent store with data already in it. I had to delete
+			the persistent store and start fresh. Once that was done, the issue
+			was easily resolved and I spun up the new Monica instance.
 		</p>
 		<p>
-			I successfully containerized my PHP Time Tracker today, transforming
-			it from a simple local script into a portable Docker application.
-			The process involved more than just writing a `Dockerfile`; I had to
-			solve a common persistence challenge where the container’s web user
-			(`www-data`) lacked permission to write to the SQLite database on my
-			host machine. Instead of using an insecure workaround like `chmod
-			777`, I re-architected the deployment to separate code from data: I
-			modified the PHP connection logic to respect environment variables
-			and configured `docker-compose` to store the database in a
-			dedicated, named volume. This approach allowed me to mount the
-			application code as read-only for better security while ensuring my
-			data persists safely in a managed volume with the correct ownership
-			permissions. There still exists a bug in the Unraid docker
-			configuration which will delete the database if the container is
-			updated. This is due to the database not being stored in a
-			persistent share, but inside the container itself. I'll have to fix
-			it later, as it works for now.
+			With Monica installed locally, I could evaluate their 4.x version,
+			as well as their 5.x version that is hosted, code name Chandler. As
+			an aside, I like their creativity in naming their app with
+			characters from the show <em>Friends</em>. The primary issue I have
+			with 4.x, is that everything requires manual entry. There isn't a
+			lot of features. It is basically just a contact database with some
+			extra fields for logging calls and notes. Their 5.x version is more
+			robust, and all the fields are editable. I appreciate their
+			underlying design choices, but the UI is terrible. Technically,
+			either version can work for my basic usage. Keeping information on
+			my personal contacts. However, in addition to my problems with the
+			apps themselves, they haven't been getting updated lately. 4.x
+			hasn't had updates in a couple years, and 5.x hasn't been updated in
+			over six months. There are many issues and pull requests have not
+			been attended to. I understand it is just two developers side
+			project, but they have paying customers on their hosted application.
+			I think the PRM space is ripe for a competing application. They have
+			millions of downloads, and tens of thousands of users per their own
+			statistics. There is a market for this type of application.
 		</p>
 		<p>
-			When I switched my Debian default shell from bash to zsh, I
-			discovered my old `.bashrc` habit of starting `ssh-agent` and
-			running `ssh-add` didn’t behave the same in `.zshrc`: zsh would
-			finish drawing the prompt and then ask for the key passphrase a
-			moment later, but the passphrase would consistently “fail” even
-			though it worked fine if I skipped it and ran `ssh-add` manually
-			afterward (or via bash). The root cause is timing/TTY
-			handling—`.zshrc` runs during interactive shell initialization, and
-			`ssh-add` can end up reading from a non-TTY or otherwise confused
-			stdin while zsh is setting up the prompt, so the passphrase input
-			isn’t captured correctly. The fix is to move agent/key setup out of
-			`.zshrc` and into `.zprofile` (login-shell init for SSH sessions),
-			and explicitly force `ssh-add` to read from the real terminal (e.g.,
-			`ssh-add ~/.ssh/id_rsa &lt;/dev/tty`) after ensuring an agent
-			exists, which makes the passphrase prompt immediate and reliable
-			again.
+			A PRM is inherently a very personal and private software. Security
+			should be at the forefront, as any data leakage could not only leak
+			a user's data, but all the data that user has kept on people close
+			to them. A database dump could be catastrophic not only for the app
+			developer, but for the users and the user's family and friends. The
+			security implications of the application are my biggest mental
+			hurdle to overcome when trying to develop this application.
+			Therefore, my idea is to create an alpha build version, that is self
+			hostable only. Let's see if I can make something that is interesting
+			and gains a small following of users that like the application
+			before I try to implement the necessary security measures for taking
+			it public.
 		</p>
 		<p>
-			Looking at my Personal Management System website, this is going to
-			take a bit more thought. With my client website, I know what I want
-			to build because they already have a website. The PMS site is
-			something novel and new. I should spend a little bit of time
-			designing what I want, but I kind of just want to ram through it. I
-			generated a new Laravel site.
+			In coming up with the initial design for the alpha build, I came
+			across discussions on managing the primary keys for the database.
+			There are several approaches such as auto-incrementing integers,
+			UUIDv4, UUIDv7, and something that was totally new to me, the ULID.
+			There is no perfect solution, as every one of these options carries
+			several caveats. Choosing a database primary key used to be a simple
+			default to auto-incrementing Integers, but in a modern, distributed
+			world, that simplicity causes massive headaches for offline
+			synchronization and privacy. While UUIDv4 solved the collision issue
+			for mobile apps, its complete randomness fragments database indexes,
+			killing performance at scale. This has led to the rise of UUIDv7 and
+			ULID as the new gold standards; both provide the global uniqueness
+			of a UUID but include a timestamp component that makes them
+			lexicographically sortable. This "hybrid" approach gives you the
+			best of all worlds: the speed of an integer, the portability of a
+			UUID, and a database that stays performant as it grows. However,
+			there are privacy concerns with both UUIDv7 and ULID, since a
+			timestamp is encoded in string. This may or may not be an issue for
+			the PRM. However, using integers only is not a solution either, as I
+			intend to make the PRM data available through mobile devices, which
+			require randomness in the records.
+		</p>
+		<p>
+			This is a common problem when it comes to developing applications,
+			at least in my little world. I will get caught up in details. Call
+			it what you want, either analysis paralysis or premature
+			optimization, it is so easy to derail a project due to this type of
+			problem. I'm evaluating a database performance problem (slow
+			indexing) for a userbase that has millions of people, and I haven't
+			even written a single line of code yet. Code is soft. It is
+			"software". It is meant to be changed, updated, optimized. When it
+			is actually time to do so. Let's change that mentality. Move fast,
+			break stuff.
 		</p>
 	</article>
 </main>
