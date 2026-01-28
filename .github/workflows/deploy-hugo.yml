@@ -25,7 +25,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: jimdtech/jimdiroffii-com:latest
+          tags: jimdtech/jimdiroffii-dot-com:latest
 
       - name: Deploy to DigitalOcean
         uses: appleboy/ssh-action@v1.0.3
@@ -35,7 +35,7 @@ jobs:
           key: ${{ secrets.DO_SSH_KEY }}
           script: |
             # Navigate to the project directory
-            cd /opt/docker/jimdiroffii-com
+            cd /opt/docker/jimdiroffii-dot-com
             
             # Pull the new image we just pushed
             docker compose pull
