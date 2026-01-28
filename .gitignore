@@ -1,0 +1,12 @@
+public/
+node_modules/
+.hugo_build.lock
+.DS_Store
+dist
+tmp
+hugo_stats.json
+resources/_gen/
+assets/jsconfig.json
+hugo.exe
+hugo.darwin
+hugo.linux
