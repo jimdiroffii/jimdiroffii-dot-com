@@ -5,6 +5,11 @@ on:
     branches: [ "hugo" ]
     paths-ignore:
       - 'README.md'
+      - '.gitattributes'
+      - '.gitignore'
+      - '.vscode/**'
+      - 'LICENSE'
+      - '.idea/**'
 
 jobs:
   build-and-deploy:
