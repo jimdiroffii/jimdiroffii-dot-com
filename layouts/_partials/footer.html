@@ -1,3 +1,9 @@
 <footer class="py-8 border-t border-slate-100 mt-auto">
     <p class="text-center text-slate-400 text-sm">&copy; {{ now.Year }} Jim Diroff II</p>
 </footer>
+
+{{/* Only load the script if a code block was rendered on this page */}}
+{{ if .Page.Store.Get "hasCodeBlock" }}
+{{ $copyJs := resources.Get "js/copy-button.js" | minify | fingerprint }}
+<script src="{{ $copyJs.RelPermalink }}" integrity="{{ $copyJs.Data.Integrity }}" defer></script>
+{{ end }}

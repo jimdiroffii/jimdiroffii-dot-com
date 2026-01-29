@@ -1,3 +1,22 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @source "hugo_stats.json";
+
+@layer components {
+    .prose :where(code):not(:where([class~="not-prose"] *, pre *)) {
+        @apply text-slate-100 rounded px-1.5 py-0.5 font-normal mx-0.5;
+        background-color: #363636 !important;
+    }
+
+    .prose :where(code):not(:where([class~="not-prose"] *, pre *))::before {
+        content: none !important;
+    }
+
+    .prose :where(code):not(:where([class~="not-prose"] *, pre *))::after {
+        content: none !important;
+    }
+
+    .prose pre {
+        background-color: #02000f !important;
+    }
+}
