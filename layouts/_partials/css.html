@@ -5,6 +5,13 @@
       <link rel="stylesheet" href="{{ .RelPermalink }}">
     {{ else }}
       {{ with . | fingerprint }}
+        <style>
+          body {
+            background-color: black;
+            color: white;
+            font-family: sans-serif;
+          }
+        </style>
         <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
       {{ end }}
     {{ end }}
