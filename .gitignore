@@ -10,3 +10,5 @@ assets/jsconfig.json
 hugo.exe
 hugo.darwin
 hugo.linux
+.vscode/
+.idea/
