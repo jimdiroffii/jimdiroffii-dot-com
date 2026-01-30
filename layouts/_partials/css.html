@@ -14,7 +14,7 @@
     z-index: 9999;
     pointer-events: none;
   }
-  
+
   .spinner {
     width: clamp(30px, 8vmin, 80px);
     height: clamp(30px, 8vmin, 80px);
@@ -34,13 +34,17 @@
     opacity: 0;
     animation: fadeIn 0.4s ease-out 0.5s forwards;
   }
-  
+
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   @keyframes fadeIn {
-    to { opacity: 1; }
+    to {
+      opacity: 1;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -57,14 +61,14 @@
   }
 </style>
 {{ with resources.Get "css/main.css" }}
-  {{ $opts := dict "minify" (not hugo.IsDevelopment) }}
-  {{ with . | css.TailwindCSS $opts }}
-    {{ if hugo.IsDevelopment }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}">
-    {{ else }}
-      {{ with . | fingerprint }}
-        <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
-      {{ end }}
-    {{ end }}
-  {{ end }}
+{{ $opts := dict "minify" (not hugo.IsDevelopment) }}
+{{ with . | css.TailwindCSS $opts }}
+{{ if hugo.IsDevelopment }}
+<link rel="stylesheet" href="{{ .RelPermalink }}">
+{{ else }}
+{{ with . | fingerprint }}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+{{ end }}
+{{ end }}
+{{ end }}
 {{ end }}
