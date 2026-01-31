@@ -13,7 +13,7 @@
 
 <div class="code-block not-prose group relative my-6 overflow-hidden rounded-lg bg-[#02000f]" data-lang="{{ $lang }}">
   <div class="flex items-center justify-between px-4 py-2 bg-slate-950/40 border-b border-white/10">
-    <span class="text-xs font-mono uppercase tracking-wider text-slate-300">{{ $lang }}</span>
+    <span class="text-md font-mono uppercase tracking-wider text-slate-300">{{ $lang }}</span>
 
     <button
       class="copy-button p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-700/50 transition-all duration-200"
@@ -28,7 +28,7 @@
 
   <pre class="code-raw sr-only">{{ $raw }}</pre>
 
-  <div class="overflow-x-auto">
+  <div class="overflow-x-auto my-2">
     {{- $result.Wrapped -}}
   </div>
 </div>

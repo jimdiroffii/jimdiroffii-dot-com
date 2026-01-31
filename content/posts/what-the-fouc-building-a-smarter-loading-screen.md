@@ -2,6 +2,7 @@
 date = '2026-01-28T20:57:49-05:00'
 draft = false
 title = 'What The FOUC: Building a Smarter Loading Screen'
+summary = 'Prevent FOUC on a static Hugo site with a CSS-only loading overlay that keeps the page black and only reveals a delayed spinner—plus accessibility and reduced-motion support.'
 +++
 
 A "flash of unstyled content" or FOUC can be particularly jarring for users. I noticed when I was building out this new Hugo site, that when I throttled the connection to GPRS, the FOUC from the stylesheet not loading was particularly nasty.
