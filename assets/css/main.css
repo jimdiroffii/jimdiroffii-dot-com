@@ -5,6 +5,11 @@
 @import "./chroma.css";
 
 @layer components {
+
+  /*** 
+   * Mobile nav start
+   */
+
   .prose :where(code):not(:where([class~="not-prose"] *, pre *)) {
     @apply text-slate-100 rounded px-1.5 py-0.5 font-normal mx-0.5;
     background-color: #363636 !important;
@@ -42,4 +47,28 @@
   .code-block .chroma pre {
     margin: 0;
   }
+
+  /*** 
+   * Mobile nav end
+   */
+
+  /*** 
+   * Mobile nav start
+   */
+
+  .nav-details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .nav-details[open] .icon-open {
+    display: none;
+  }
+
+  .nav-details:not([open]) .icon-close {
+    display: none;
+  }
+
+  /*** 
+   * Mobile nav end
+   */
 }
