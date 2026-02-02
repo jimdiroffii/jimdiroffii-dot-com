@@ -1,6 +1,6 @@
 +++
 date = '2026-02-01T00:00:01-05:00'
-draft = true
+draft = false
 title = '365 Days of Code - Day 012'
 summary = 'Blogging and fun with Project Euler!'
 +++
