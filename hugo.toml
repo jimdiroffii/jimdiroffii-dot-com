@@ -11,6 +11,7 @@ target = 'css'
 [[build.cachebusters]]
 source = '(postcss|tailwind)\.config\.js'
 target = 'css'
+
 [module]
 [[module.mounts]]
 source = 'assets'
