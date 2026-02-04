@@ -348,6 +348,11 @@ long long *factor(long long n, unsigned int size, bool_t isPrimeCheck)
     return NULL;
   }
 
+  if (isPrimeCheck == TRUE)
+  {
+    factors[0] = 0; // Assume prime
+  }
+
   while (divisor < quotient)
   {
     if (n % divisor == 0 && isPrimeCheck == TRUE)
@@ -370,7 +375,7 @@ long long *factor(long long n, unsigned int size, bool_t isPrimeCheck)
 }
 
 /* Pg. 87 - The C Programming Language (2nd Ed) - Recursive Quicksort */
-/* qsort: sort v[left]..v[right into increasing order */
+/* qsort: sort v[left]..v[right into decreasing order */
 void _Qsort(long long v[], int left, int right)
 {
   int i, last;
@@ -381,7 +386,7 @@ void _Qsort(long long v[], int left, int right)
   swap(v, left, (left + right) / 2);  /* move partition elem */
   last = left;                        /* to v[0] */
   for (i = left + 1; i <= right; i++) /* partition */
-    if (v[i] > v[left])
+    if (v[i] > v[left]) /* decreasing order */
       swap(v, ++last, i);
   swap(v, left, last); /* restore partition elem */
   _Qsort(v, left, last - 1);
@@ -436,6 +441,7 @@ int main()
   long long *primeFactors = NULL;
   for (size_t i = 0; i < size; i++)
   {
+    free(primeFactors);
     primeFactors = factor(factors[i], size, TRUE);
     if (primeFactors == NULL)
     {
@@ -493,3 +499,134 @@ Number of factors found: 14
 ```
 
 We got our correct answer of `6857`.
+
+## Afterthoughts (Bug Squishing)
+
+I actually had two bugs in my code. One caused leaked memory, and the other was an *uninitialized value created by heap allocation*. The corrected code was updated above, but you check [this commit](https://github.com/jimdiroffii/jimdiroffii-dot-com/commit/b8cb5ac006322fdd2794e9aed0ef8d0c18fd4393) to see the problem code.
+
+- **Uninitialized sentinel in the prime-check path:** when `isPrimeCheck == TRUE`, my function only writes `factors[0] = -1` when it finds a divisor. If the number is prime, that branch never fires, so `factors[0]` is never initialized. I was *accidentally* treating whatever garbage happened to be in malloc’d memory as meaningful — undefined behavior. The fix was to explicitly set `factors[0] = 0` right after allocation (assume prime until proven otherwise).
+
+- **Leak from overwriting a pointer in a loop:** my prime-check loop called `factor()` each iteration (which `malloc`s), stored the result in `primeFactors`, and only called `free()` once at the end. Each new assignment overwrote the previous pointer, so the earlier allocations became unreachable and leaked. The fix was to `free(primeFactors)` before assigning a new buffer (or redesign the prime check to not allocate at all).
+
+Lessons learned:
+
+- Run `valgrind` before posting code online…
+- If you `malloc` in a loop, make sure you `free` in that loop (or keep ownership rules crystal clear)
+- `malloc` does **not** zero memory — if you need zeros/sentinels, initialize them (or use `calloc`)
+
+For reference, here was the `valgrind` output that caught it:
+
+```bash
+❯ valgrind --leak-check=full --track-origins=yes -s ./p03
+==25489== Memcheck, a memory error detector
+==25489== Copyright (C) 2002-2024, and GNU GPL'd, by Julian Seward et al.
+==25489== Using Valgrind-3.24.0 and LibVEX; rerun with -h for copyright info
+==25489== Command: ./p03
+==25489==
+factor[0] = 8462696833
+factor[1] = 716151937
+factor[2] = 408464633
+factor[3] = 87625999
+factor[4] = 10086647
+factor[5] = 5753023
+factor[6] = 1234169
+factor[7] = 486847
+factor[8] = 104441
+factor[9] = 59569
+factor[10] = 6857
+factor[11] = 1471
+factor[12] = 839
+factor[13] = 71
+Number of factors found: 14
+8462696833 is not prime
+716151937 is not prime
+408464633 is not prime
+87625999 is not prime
+10086647 is not prime
+5753023 is not prime
+1234169 is not prime
+486847 is not prime
+104441 is not prime
+59569 is not prime
+==25489== Conditional jump or move depends on uninitialised value(s)
+==25489==    at 0x109565: main (p03.c:124)
+==25489==  Uninitialised value was created by a heap allocation
+==25489==    at 0x4844818: malloc (vg_replace_malloc.c:446)
+==25489==    by 0x1091A4: factor (p03.c:22)
+==25489==    by 0x10952A: main (p03.c:116)
+==25489==
+6857 is prime
+==25489==
+==25489== HEAP SUMMARY:
+==25489==     in use at exit: 1,120 bytes in 10 blocks
+==25489==   total heap usage: 13 allocs, 3 frees, 2,368 bytes allocated
+==25489==
+==25489== 1,120 bytes in 10 blocks are definitely lost in loss record 1 of 1
+==25489==    at 0x4844818: malloc (vg_replace_malloc.c:446)
+==25489==    by 0x1091A4: factor (p03.c:22)
+==25489==    by 0x10952A: main (p03.c:116)
+==25489==
+==25489== LEAK SUMMARY:
+==25489==    definitely lost: 1,120 bytes in 10 blocks
+==25489==    indirectly lost: 0 bytes in 0 blocks
+==25489==      possibly lost: 0 bytes in 0 blocks
+==25489==    still reachable: 0 bytes in 0 blocks
+==25489==         suppressed: 0 bytes in 0 blocks
+==25489==
+==25489== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==25489==
+==25489== 1 errors in context 1 of 2:
+==25489== Conditional jump or move depends on uninitialised value(s)
+==25489==    at 0x109565: main (p03.c:124)
+==25489==  Uninitialised value was created by a heap allocation
+==25489==    at 0x4844818: malloc (vg_replace_malloc.c:446)
+==25489==    by 0x1091A4: factor (p03.c:22)
+==25489==    by 0x10952A: main (p03.c:116)
+==25489==
+==25489== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+```
+
+And the clean output after the bugs were fixed:
+
+```bash
+❯ valgrind --leak-check=full --track-origins=yes -s ./p03
+==25932== Memcheck, a memory error detector
+==25932== Copyright (C) 2002-2024, and GNU GPL'd, by Julian Seward et al.
+==25932== Using Valgrind-3.24.0 and LibVEX; rerun with -h for copyright info
+==25932== Command: ./p03
+==25932==
+factor[0] = 8462696833
+factor[1] = 716151937
+factor[2] = 408464633
+factor[3] = 87625999
+factor[4] = 10086647
+factor[5] = 5753023
+factor[6] = 1234169
+factor[7] = 486847
+factor[8] = 104441
+factor[9] = 59569
+factor[10] = 6857
+factor[11] = 1471
+factor[12] = 839
+factor[13] = 71
+Number of factors found: 14
+8462696833 is not prime
+716151937 is not prime
+408464633 is not prime
+87625999 is not prime
+10086647 is not prime
+5753023 is not prime
+1234169 is not prime
+486847 is not prime
+104441 is not prime
+59569 is not prime
+6857 is prime
+==25932==
+==25932== HEAP SUMMARY:
+==25932==     in use at exit: 0 bytes in 0 blocks
+==25932==   total heap usage: 13 allocs, 13 frees, 2,368 bytes allocated
+==25932==
+==25932== All heap blocks were freed -- no leaks are possible
+==25932==
+==25932== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+```
