@@ -2,7 +2,7 @@ name: Deploy Hugo Site
 
 on:
   push:
-    branches: [ "hugo" ]
+    branches: [ "main" ]
     paths-ignore:
       - 'README.md'
       - '.gitattributes'
