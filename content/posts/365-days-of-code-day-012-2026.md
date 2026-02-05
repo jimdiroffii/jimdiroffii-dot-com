@@ -144,37 +144,27 @@ The naive solution checks every single number below our max value. Much of this 
 
 If we consider `k` as our multiple (`3` or `5`), and `N` as our max value (`1000`), then:
 
-```math
-k, 2k, 3k, ..., mk
-```
+$$k, 2k, 3k, \dots, mk$$
 
 Where `m` is the largest integer such that `mk < N`.
 
 Furthermore, this means:
 
-```math
-m = \frac{N-1}{k}
-```
+$$m = \frac{N-1}{k}$$
 
 If `k = 3`, `N = 10`: multiples below `10` are `3`, `6`, `9` and `m = 9/3 = 3`.
 
 We can find the sum by using the formula:
 
-```math
-1+2+3+...+m = \frac{m(m+1)}{2}
-```
+$$1+2+3+\dots+m = \frac{m(m+1)}{2}$$
 
 Therefore, the sum of multiples of `k` below `N` is:
 
-```math
-sum(k, N) = K \cdot \frac{m(m+1)}{2}
-```
+$$sum(k, N) = K \cdot \frac{m(m+1)}{2}$$
 
 where
 
-```math
-m = \frac{N-1}{k}
-```
+$$m = \frac{N-1}{k}$$
 
 We need to add the multiples of both `3` and `5` though, so we have one issue. We will double count all numbers that are multiples of both `3` and `5`. We resolve this by subtracting the sum of the lowest common multiple (`LCM`) of `3` and `5`, which is `15`, `N` times. This is known as the *inclusion-exclusion* principle.
 
@@ -182,30 +172,22 @@ If you haven't caught on yet, we have changed our algorithm from a simple naive 
 
 ##### Multiples of 3 under 1000
 
-```math
-m_3 = \frac{999}{3} = 333 \\
-S_3 = 3 \cdot \frac{333\cdot334}{2} = 166833
-```
+$$m_3 = \frac{999}{3} = 333$$
+$$S_3 = 3 \cdot \frac{333\cdot334}{2} = 166833$$
 
 ##### Multiples of 5 under 1000
 
-```math
-m_5 = \frac{999}{5} = 199 \\
-S_5 = 5 \cdot \frac{199\cdot200}{2} = 99500
-```
+$$m_5 = \frac{999}{5} = 199$$
+$$S_5 = 5 \cdot \frac{199\cdot200}{2} = 99500$$
 
 ##### Multiples of 15 under 1000
 
-```math
-m_{15} = \frac{999}{15} = 66 \\
-S_{15} = 15 \cdot \frac{66\cdot67}{2} = 33165
-```
+$$m_{15} = \frac{999}{15} = 66$$
+$$S_{15} = 15 \cdot \frac{66\cdot67}{2} = 33165$$
 
 ##### Final Sum
 
-```math
-S = 166833 + 99500 - 33165 = 233168
-```
+$$S = 166833 + 99500 - 33165 = 233168$$
 
 Simple, right?
 

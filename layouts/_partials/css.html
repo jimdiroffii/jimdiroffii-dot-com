@@ -60,6 +60,7 @@
     }
   }
 </style>
+
 {{ with resources.Get "css/main.css" }}
 {{ $opts := dict "minify" (not hugo.IsDevelopment) }}
 {{ with . | css.TailwindCSS $opts }}
