@@ -1,0 +1,75 @@
+<style>
+  #loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  .spinner {
+    width: clamp(30px, 8vmin, 80px);
+    height: clamp(30px, 8vmin, 80px);
+    border: clamp(3px, 0.6vmin, 6px) solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    opacity: 0;
+    animation: spin 1s linear infinite, fadeIn 0.4s ease-out 0.5s forwards;
+  }
+
+  .loading-text {
+    color: #e2e8f0;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    animation: fadeIn 0.4s ease-out 0.5s forwards;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spinner {
+      animation: none;
+      border-color: #fff;
+      opacity: 1;
+    }
+
+    .loading-text {
+      animation: none;
+      opacity: 1;
+    }
+  }
+</style>
+
+{{ with resources.Get "css/main.css" }}
+{{ $opts := dict "minify" (not hugo.IsDevelopment) }}
+{{ with . | css.TailwindCSS $opts }}
+{{ if hugo.IsDevelopment }}
+<link rel="stylesheet" href="{{ .RelPermalink }}">
+{{ else }}
+{{ with . | fingerprint }}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}

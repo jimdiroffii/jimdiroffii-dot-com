@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{{ .Title }} | Jim Diroff II</title>
+
+  {{ with (templates.Defer (dict "key" "global")) }}
+  {{ partial "css.html" . }}
+  {{ end }}
+
+{{/*  KaTeX Stylesheet for Mathematical Markup (doesn't work in _partials/css.html) */}}
+{{ $noop := .WordCount }}
+{{ if .Page.Store.Get "hasMath" }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css"
+  integrity="sha384-WcoG4HRXMzYzfCgiyfrySxx90XSl2rxY5mnVY5TwtWE6KLrArNKn0T/mOgNL0Mmi" crossorigin="anonymous">
+{{ end }}
+</head>
+
+<body class="bg-black! antialiased">
+  <!-- This loading screen will be hidden once the main content is fully loaded -->
+  <div id="loading-screen" aria-hidden="true"
+    class="opacity-0 pointer-events-none transition-opacity duration-300 ease-out">
+    <div class="spinner"></div>
+    <div class="loading-text">Loading...</div>
+  </div>
+
+  <!-- Main content container -->
+  <div id="content"
+    class="text-white max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col opacity-100 transition-opacity duration-300 ease-in">
+    {{ partial "header.html" . }}
+
+    <main class="py-10 min-h-[60vh]">
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    {{ partial "footer.html" . }}
+  </div>
+</body>
+
+</html>

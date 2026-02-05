@@ -1,0 +1,74 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@source "hugo_stats.json";
+
+@import "./chroma.css";
+
+@layer components {
+
+  /*** 
+   * Markdown code block start
+   */
+
+  .prose :where(code):not(:where([class~="not-prose"] *, pre *)) {
+    @apply text-slate-100 rounded px-1.5 py-0.5 font-normal mx-0.5;
+    background-color: #363636 !important;
+  }
+
+  .prose :where(code):not(:where([class~="not-prose"] *, pre *))::before {
+    content: none !important;
+  }
+
+  .prose :where(code):not(:where([class~="not-prose"] *, pre *))::after {
+    content: none !important;
+  }
+
+  .prose pre {
+    background-color: #02000f !important;
+  }
+
+  .code-block .highlight,
+  .code-block .chroma,
+  .code-block .highlight>div,
+  .code-block .chroma pre {
+    background-color: transparent !important;
+  }
+
+  .code-block .chroma table {
+    min-width: 100%;
+    width: auto;
+    border-spacing: 0;
+  }
+
+  .code-block .chroma td:last-child {
+    width: 100%;
+  }
+
+  .code-block .chroma pre {
+    margin: 0;
+  }
+
+  /*** 
+   * Markdown code block end
+   */
+
+  /*** 
+   * Mobile nav start
+   */
+
+  .nav-details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .nav-details[open] .icon-open {
+    display: none;
+  }
+
+  .nav-details:not([open]) .icon-close {
+    display: none;
+  }
+
+  /*** 
+   * Mobile nav end
+   */
+}
