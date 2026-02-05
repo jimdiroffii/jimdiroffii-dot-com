@@ -22,7 +22,7 @@ int main() {
 
 Right away, I get some warnings from the VS Code Extension Pack for C/C++. It seems the last time I wrote some code with this, I did it on Windows, so the paths aren't configured correctly. I'm now developing on a remote (local) server that I use to host all my code. I'll need to figure out the best way to manage this in VS Code, or just skip that and go with Vim. I think I'll just go with Vim on the server itself.
 
-I'll go with a shortcut for Debian and install `build-essential`. This shoudl give me all the necessary tools to work with C. I'm also going to install some optional tooling, in case I need it later.
+I'll go with a shortcut for Debian and install `build-essential`. This should give me all the necessary tools to work with C. I'm also going to install some optional tooling, in case I need it later.
 
 ```bash
 sudo apt install build-essential gdb valgrind strace ltrace gdbserver binutils elfutils cmake
@@ -53,7 +53,7 @@ The first Project Euler problem is a variant of the famous [Fizz Buzz](https://e
 
 - On multiples of 3, say `fizz`.
 - On multiples of 5, say `buzz`.
-- If divisable by both, say `fizzbuzz`.
+- If divisible by both, say `fizzbuzz`.
 
 #### Solve The Problem (naive)
 
@@ -63,7 +63,7 @@ The problem states:
 >
 > Find the sum of all the multiples of 3 or 5 below 1000.
 
-The simpliest naive solution I can think of is to just run a `for` loop that checks for the multiples using a modulo, and an `if` statement for `3` and `5`.
+The simplest naive solution I can think of is to just run a `for` loop that checks for the multiples using a modulo, and an `if` statement for `3` and `5`.
 
 ```c
 #include <stdio.h>
@@ -93,7 +93,7 @@ int main() {
 
 This gets the job done, and produces the correct result, which is `233168`. Optimizing such a simple program is overkill, but that is part of the fun of Project Euler. Not only getting the result, but practicing programming.
 
-#### Improvments
+#### Improvements
 
 The first optimization I can think of is to collapse the `if/else` statement into an `or`.
 
@@ -164,7 +164,7 @@ We can find the sum by using the formula:
 1+2+3+...+m = \frac{m(m+1)}{2}
 ```
 
-Therefore, the sum of multples of `k` below `N` is:
+Therefore, the sum of multiples of `k` below `N` is:
 
 ```math
 sum(k, N) = K \cdot \frac{m(m+1)}{2}

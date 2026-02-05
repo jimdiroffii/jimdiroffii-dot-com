@@ -25,7 +25,7 @@ All the content is written in Markdown. I love this workflow, and was one of my 
 
 ## Getting Started With Hugo
 
-It actually wasn't easy to get started with Hugo. The documentation is quite good, but the documentation isn't structure for learning Hugo from scratch. There is a quickstart guide, but it relies on using a Hugo template, and I wanted to start from scratch. I did take a look at a couple templates, but they might as well be written in hieroglphics for someone who has never dealt with the Hugo templating system before. Sometimes, it is helpful to have a template, but more often than not I find it helpful to build things myself starting from nothing.
+It actually wasn't easy to get started with Hugo. The documentation is quite good, but the documentation isn't structure for learning Hugo from scratch. There is a quickstart guide, but it relies on using a Hugo template, and I wanted to start from scratch. I did take a look at a couple templates, but they might as well be written in hieroglyphics for someone who has never dealt with the Hugo templating system before. Sometimes, it is helpful to have a template, but more often than not I find it helpful to build things myself starting from nothing.
 
 A base installation of Hugo comes with practically no configuration, and doesn't work right away. In my opinion, I would change the default Hugo installation so that it can work out of the box. It took a little while, and some AI help, to realize that Hugo needs three essential files to begin development: `baseof.html`, `single.html` and `list.html`.
 
@@ -108,9 +108,9 @@ Of course, there isn't any content yet, so let's create something. The only file
 hugo new content content/posts/test.md
 ```
 
-Importantly, this new content file will not be rendered until `draft` is set to `false` in the frontmatter.
+Importantly, this new content file will not be rendered until `draft` is set to `false` in the front matter.
 
-- `default.md`: The base archetype created by Hugo, notice `draft = true` in the frontmatter. New files will take on this option.
+- `default.md`: The base archetype created by Hugo, notice `draft = true` in the front matter. New files will take on this option.
 
 ```toml
 +++
@@ -145,7 +145,7 @@ CMD ["nginx", "-g", "daemon off;"]
 Second, the compose file:
 
 ```yaml
-ervices:
+services:
   hugo-site:
     image: jimdtech/jimdiroffii-dot-com:latest
     container_name: jimdiroffii-dot-com

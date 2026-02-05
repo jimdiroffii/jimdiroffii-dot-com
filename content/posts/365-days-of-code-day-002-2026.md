@@ -4,7 +4,7 @@ draft = false
 title = '365 Days of Code - Day 002'
 +++
 
-The second day of coding went fairly productive. I worked on the [Laravel From Scratch 2026](https://laracasts.com/series/laravel-from-scratch-2026) series, a [new vimrc file](https://github.com/jimdiroffii/dotfiles/blob/main/.vimrc), a prototype website for a client, and vibecoded a [PHP time tracker](https://github.com/jimdiroffii/time-tracker).
+The second day of coding went fairly productive. I worked on the [Laravel From Scratch 2026](https://laracasts.com/series/laravel-from-scratch-2026) series, a [new vimrc file](https://github.com/jimdiroffii/dotfiles/blob/main/.vimrc), a prototype website for a client, and vibe coded a [PHP time tracker](https://github.com/jimdiroffii/time-tracker).
 
 The [Laracasts](https://laracasts.com/) tutorial on Laravel lead me through setting up basic views and routes. I've done the tutorial before, but it was on a previous version of Laravel and over a year ago. The other issue with doing tutorials is not translating that knowledge directly into a more complex project. This directly lead me into two additional projects, vimrc and a client website.
 

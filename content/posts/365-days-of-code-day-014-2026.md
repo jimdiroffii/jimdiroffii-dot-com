@@ -19,7 +19,7 @@ There are a couple problems to solve here. We need to find the factors of a numb
 
 ### Find Factors
 
-Regarding the number `600851475143`, we can determine a few things. First, the number is odd, so it is not divisable by `2`. Second, adding the numbers together sums to `44`, which is not divisable by `3`. Third, the number doesn't end in `0` or `5`, so it is not divisable by `5`. That solves the simpliest rules of division that I know off the bat.
+Regarding the number `600851475143`, we can determine a few things. First, the number is odd, so it is not divisible by `2`. Second, adding the numbers together sums to `44`, which is not divisible by `3`. Third, the number doesn't end in `0` or `5`, so it is not divisible by `5`. That solves the simplest rules of division that I know off the bat.
 
 This gives me an idea though. If we iterate the small values, and check for a reminder, we can find the largest factors. Then, we just need to check if that factor is prime.
 
@@ -111,7 +111,7 @@ Divisor:  486847
 Quotient: 1234169
 ```
 
-I can count this, buy why? I have C to do that for me. I'll also remove the redundent `else` statement.
+I can count this, buy why? I have C to do that for me. I'll also remove the redundant `else` statement.
 
 ```c
 #include <stdio.h>
@@ -168,7 +168,7 @@ This gives us `14` factors to verify primality.
 
 We technically created a function that can test for primes. Since we are checking for factors, if we don't find any, we know it is prime. Let's refactor this into a function, get all of our factors, and then run it again for each of the factors.
 
-The idea is to store all the factors in an array, sort it in decending order, check each value for factors, and return the first value that doesn't have any factors.
+The idea is to store all the factors in an array, sort it in descending order, check each value for factors, and return the first value that doesn't have any factors.
 
 I'll need two functions, one that checks for all factors, and one that quits early when any factor is found, since the input cannot be prime.
 
