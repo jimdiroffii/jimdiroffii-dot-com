@@ -2,7 +2,7 @@
 date = '2026-02-04T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 015'
-summary = 'About Page, Math Rendering with KaTeX'
+summary = 'About Page, Math Rendering with KaTeX, new PR in cspell-dicts'
 +++
 
 Today, I came back to [Hugo](https://gohugo.io/), to give the site a bit more polish. The first order of business was to create an [About](https://test.jimdiroffii.com/about) page with some details on me and my history. I'm using this site on my resumes, and it is nice to give a bit more detail about my history beyond what fits on a typical resume or cover letter.
@@ -62,3 +62,11 @@ These are block equations:
 \[a^*=x-b^*\]
 
 $$a^*=x-b^*$$
+
+## PR in `cspell-dicts`
+
+Almost forgot that I also did a little contribution for [streetsidesoftware/cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts) today. It was a minor change, but hopefully they appreciate it. I added the word `overreliance` to the `en_shared` dictionary. This should prevent that word from being flagged as a spelling error in future versions. Of course, presuming that my [PR](https://github.com/streetsidesoftware/cspell-dicts/pull/5227) gets merged.
+
+`cspell-dicts` is the repo that contains all the dictionaries in use for the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension in [VS Code](https://code.visualstudio.com/).
+
+I had run `cspell` through my website repo today and fixed any spelling errors in my previous posts. This is when I noticed a few missing words from the dictionary. I only performed a PR for `overreliance` today, to ensure that I had the contribution correct, and will add the other words if my PR is approved.
