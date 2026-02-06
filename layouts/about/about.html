@@ -1,0 +1,13 @@
+{{ define "main" }}
+<section class="space-y-6">
+  <h1 class="text-4xl font-bold tracking-tight text-center">
+    {{ .Title }}
+  </h1>
+
+  {{ with .Content }}
+  <div class="prose prose-invert max-w-none">
+    {{ . }}
+  </div>
+  {{ end }}
+</section>
+{{ end }}
