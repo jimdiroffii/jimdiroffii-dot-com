@@ -112,3 +112,4 @@ I added a proper Hugo file formatter to my VS Code settings. I created a new pro
 - Tailwind CSS IntelliSense
 - Hugo Language and Syntax Support
 - Even Better TOML
+- markdownlint
