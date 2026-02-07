@@ -4,9 +4,17 @@
 {{- $isHTTP := or (eq $u.Scheme "http") (eq $u.Scheme "https") -}}
 {{- $isExternal := and $u.IsAbs $isHTTP (ne $u.Hostname $base.Hostname) -}}
 
-<a href="{{ .Destination | safeURL }}" {{- with .Title }} title="{{ . }}" {{ end -}} {{- if $isExternal }}
-  target="_blank" rel="nofollow noopener noreferrer" {{ end -}}>
+
+<a
+  href="{{ .Destination | safeURL }}"
+  {{- with .Title }}title="{{ . }}"{{ end -}}
+  {{- if $isExternal }}
+    target="_blank" rel="nofollow noopener noreferrer"
+  {{ end -}}
+>
   {{- with .Text }}{{ . }}{{ end -}}
-  {{- if $isExternal }}<span class="sr-only"> (opens in a new tab)</span>{{ end -}}
+  {{- if $isExternal }}
+    <span class="sr-only"> (opens in a new tab)</span>
+  {{ end -}}
 </a>
 {{- /* chomp trailing newline */ -}}

@@ -5,7 +5,6 @@
 @import "./chroma.css";
 
 @layer components {
-
   /*** 
    * Markdown code block start
    */
@@ -29,7 +28,7 @@
 
   .code-block .highlight,
   .code-block .chroma,
-  .code-block .highlight>div,
+  .code-block .highlight > div,
   .code-block .chroma pre {
     background-color: transparent !important;
   }

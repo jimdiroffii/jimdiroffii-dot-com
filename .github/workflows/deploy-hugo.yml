@@ -2,14 +2,14 @@ name: Deploy Hugo Site
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
     paths-ignore:
-      - 'README.md'
-      - '.gitattributes'
-      - '.gitignore'
-      - '.vscode/**'
-      - 'LICENSE'
-      - '.idea/**'
+      - "README.md"
+      - ".gitattributes"
+      - ".gitignore"
+      - ".vscode/**"
+      - "LICENSE"
+      - ".idea/**"
 
 jobs:
   build-and-deploy:
@@ -42,14 +42,7 @@ jobs:
           username: ${{ secrets.DO_USERNAME }}
           key: ${{ secrets.DO_SSH_KEY }}
           script: |
-            # Navigate to the project directory
             cd /opt/docker/jimdiroffii-dot-com
-            
-            # Pull the new image we just pushed
             docker compose pull
-            
-            # Recreate the container with the new image
             docker compose up -d
-            
-            # Clean up old images to save disk space
             docker system prune -f
