@@ -27,3 +27,23 @@
 {{/* Embedded template for X (Twitter) cards (this file doesn't exist) */}}
 {{/* https://developer.x.com/en/docs/twitter-for-websites/cards/overview/abouts-cards */}}
 {{ partial "twitter_cards.html" . }}
+
+{{/* Inline styles for loading screen */}}
+{{ partial "loading.html" . }}
+
+{{/* Site styles, deferred for Tailwind */}}
+{{ with (templates.Defer (dict "key" "global")) }}
+  {{ partial "head/css.html" . }}
+{{ end }}
+
+{{/* KaTeX Stylesheet for Math markup in markdown */}}
+{{/* This doesn't work when included in _partials/css.html */}}
+{{ $noop := .WordCount }}
+{{ if .Page.Store.Get "hasMath" }}
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css"
+    integrity="sha384-WcoG4HRXMzYzfCgiyfrySxx90XSl2rxY5mnVY5TwtWE6KLrArNKn0T/mOgNL0Mmi"
+    crossorigin="anonymous"
+  />
+{{ end }}
