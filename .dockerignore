@@ -1,0 +1,14 @@
+.git
+.gitignore
+.gitattributes
+.github
+
+.vscode
+.idea
+
+node_modules
+public
+
+README.md
+LICENSE
+Dockerfile
