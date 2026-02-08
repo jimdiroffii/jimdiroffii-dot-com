@@ -1,0 +1,172 @@
+{{ define "main" }}
+  <div
+    id="flashlight-container"
+    tabindex="0"
+    aria-describedby="flashlight-help"
+    class="relative flex min-h-[80vh] w-full touch-none flex-col items-center justify-center overflow-hidden bg-black text-center outline-none focus:ring-2 focus:ring-blue-500/50"
+  >
+    <p id="flashlight-help" class="sr-only">
+      This page is dark. Move your mouse or touch to shine a light and find the
+      content. Press Tab to reach “Return to Safety”. You can also use the arrow
+      keys to move the light.
+    </p>
+
+    <div class="relative z-0 flex flex-col items-center gap-6 px-4">
+      <h1 class="text-9xl font-black tracking-tighter text-white opacity-20">
+        404
+      </h1>
+
+      <h2 class="text-2xl font-bold text-white md:text-4xl">
+        There's nothing here...
+      </h2>
+
+      <p class="max-w-md text-gray-400">
+        It looks like you've wandered into the void. Shine your light to find
+        the way back.
+      </p>
+
+      <p class="mt-4 animate-pulse text-sm text-yellow-100/50">
+        💡 Move your light to explore!
+      </p>
+
+      <a
+        id="home-link"
+        class="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-white px-8 py-3 font-bold text-black transition-transform hover:scale-105 focus:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500"
+        href="{{ .Site.Home.RelPermalink }}"
+      >
+        <span>Return to Safety</span>
+        <svg
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4 transition-transform group-hover:translate-x-1"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17 8l4 4m0 0l-4 4m4-4H3"
+          />
+        </svg>
+      </a>
+
+      <p class="text-xs text-gray-500">
+        Tip: if you think this is a broken link, try starting from the home
+        page.
+      </p>
+    </div>
+
+    <div
+      id="flashlight-overlay"
+      class="pointer-events-none absolute inset-0 z-10 hidden motion-reduce:hidden"
+      aria-hidden="true"
+      style="background: radial-gradient(circle 250px at var(--x, 50%) var(--y, 50%), transparent 0%, rgba(0,0,0,0.98) 100%);"
+    ></div>
+
+    <noscript>
+      <style>
+        /* If JS is disabled, ensure overlay is never shown */
+        #flashlight-overlay {
+          display: none !important;
+        }
+      </style>
+    </noscript>
+  </div>
+
+  <script>
+    (() => {
+      const container = document.getElementById("flashlight-container");
+      const overlay = document.getElementById("flashlight-overlay");
+      const homeLink = document.getElementById("home-link");
+
+      if (!container || !overlay || !homeLink) return;
+
+      // 1. Reveal overlay now that JS is running
+      overlay.classList.remove("hidden");
+
+      // State
+      let rect = container.getBoundingClientRect();
+      let isFocusedOnLink = false;
+
+      // Helpers
+      const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
+
+      function moveLight(clientX, clientY) {
+        // Calculate relative to container
+        const x = clamp(clientX - rect.left, 0, rect.width);
+        const y = clamp(clientY - rect.top, 0, rect.height);
+
+        container.style.setProperty("--x", `${x}px`);
+        container.style.setProperty("--y", `${y}px`);
+      }
+
+      function centerLightOnLink() {
+        const linkRect = homeLink.getBoundingClientRect();
+        // Calculate center of link in viewport coords
+        const centerX = linkRect.left + linkRect.width / 2;
+        const centerY = linkRect.top + linkRect.height / 2;
+        moveLight(centerX, centerY);
+      }
+
+      // 2. Event Listeners
+
+      // Mouse/Touch: 'pointermove' covers mouse and touch (if touch-action is set)
+      container.addEventListener("pointermove", (e) => {
+        // If the user is manually moving, stop snapping to the link until they refocus it
+        isFocusedOnLink = false;
+        moveLight(e.clientX, e.clientY);
+      });
+
+      // Keyboard: Snap to link when tabbing
+      homeLink.addEventListener("focus", () => {
+        isFocusedOnLink = true;
+        rect = container.getBoundingClientRect(); // Refresh rect in case of scroll
+        centerLightOnLink();
+      });
+
+      // Keyboard: Arrow keys (when container is focused)
+      container.addEventListener("keydown", (e) => {
+        const keys = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+        if (!keys.includes(e.key)) return;
+
+        e.preventDefault(); // Stop scroll
+        isFocusedOnLink = false;
+
+        // Get current CSS variable values (or default to center)
+        const style = getComputedStyle(container);
+        const currentX =
+          parseFloat(style.getPropertyValue("--x")) || rect.width / 2;
+        const currentY =
+          parseFloat(style.getPropertyValue("--y")) || rect.height / 2;
+
+        const step = 40; // Pixels per keypress
+        let newX = currentX;
+        let newY = currentY;
+
+        if (e.key === "ArrowUp") newY -= step;
+        if (e.key === "ArrowDown") newY += step;
+        if (e.key === "ArrowLeft") newX -= step;
+        if (e.key === "ArrowRight") newX += step;
+
+        // Convert back to viewport coords for moveLight
+        moveLight(rect.left + newX, rect.top + newY);
+      });
+
+      // Window Resize: Update bounds and keep light centered if it was locked to link
+      window.addEventListener("resize", () => {
+        rect = container.getBoundingClientRect();
+        if (isFocusedOnLink) {
+          centerLightOnLink();
+        }
+      });
+
+      // 3. Initialization
+      // Initialize immediately (scripts in body run after elements are parsed)
+      rect = container.getBoundingClientRect();
+      centerLightOnLink();
+      isFocusedOnLink = true;
+    })();
+  </script>
+{{ end }}
