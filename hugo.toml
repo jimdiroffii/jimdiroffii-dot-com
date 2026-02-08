@@ -1,31 +1,38 @@
-baseURL = 'https://test.jimdiroffii.com/'
-languageCode = 'en-us'
+# Base Data
+baseURL = 'https://www.jimdiroffii.com/'
+languageCode = 'en-US'
 title = 'Jim Diroff II'
 
+# Optional Parameters
+[params]
+  description = 'Portfolio and Personal Blog for Jim Diroff II'
+
+# This build and module sections currently support Tailwind
 [build]
-[build.buildStats]
-enable = true
-[[build.cachebusters]]
-source = 'assets/notwatching/hugo_stats\.json'
-target = 'css'
-[[build.cachebusters]]
-source = '(postcss|tailwind)\.config\.js'
-target = 'css'
+  [build.buildStats]
+    enable = true
+  [[build.cachebusters]]
+    source = 'assets/notwatching/hugo_stats\.json'
+    target = 'css'
+  [[build.cachebusters]]
+    source = '(postcss|tailwind)\.config\.js'
+    target = 'css'
 
 [module]
-[[module.mounts]]
-source = 'assets'
-target = 'assets'
-[[module.mounts]]
-disableWatch = true
-source = 'hugo_stats.json'
-target = 'assets/notwatching/hugo_stats.json'
+  [[module.mounts]]
+    source = 'assets'
+    target = 'assets'
+  [[module.mounts]]
+    disableWatch = true
+    source = 'hugo_stats.json'
+    target = 'assets/notwatching/hugo_stats.json'
 
+# This section supports KaTeX markup for math rendering
 [markup]
-[markup.goldmark]
-[markup.goldmark.extensions]
-[markup.goldmark.extensions.passthrough]
-enable = true
-[markup.goldmark.extensions.passthrough.delimiters]
-block = [['\[', '\]'], ['$$', '$$']]
-inline = [['\(', '\)']]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+      [markup.goldmark.extensions.passthrough.delimiters]
+        block = [['\[', '\]'], ['$$', '$$']]
+        inline = [['\(', '\)']]

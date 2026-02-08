@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+<html
+  lang="{{ site.Language.LanguageCode }}"
+  dir="{{ or site.Language.LanguageDirection `ltr` }}"
+>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {{ partial "head.html" . }}
 
-    <title>{{ .Title }} | Jim Diroff II</title>
 
     <style>
       #loading-screen {
