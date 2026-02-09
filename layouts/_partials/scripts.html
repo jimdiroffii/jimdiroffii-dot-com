@@ -1,0 +1,10 @@
+{{/* Copy button */}}
+{{/* Only load the script if a code block was rendered on this page */}}
+{{ if .Page.Store.Get "hasCodeBlock" }}
+  {{ $copyJs := resources.Get "js/copy-button.js" | minify | fingerprint }}
+  <script
+    src="{{ $copyJs.RelPermalink }}"
+    integrity="{{ $copyJs.Data.Integrity }}"
+    defer
+  ></script>
+{{ end }}

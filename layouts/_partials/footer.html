@@ -1,60 +1,46 @@
-<footer
-  class="py-8 border-t border-slate-100 mt-auto flex flex-col items-center justify-center"
->
-  <p class="text-center text-slate-400 text-sm mb-1">
-    &copy; {{ now.Year }} Jim Diroff II
-  </p>
-  <p class="text-center text-slate-400 text-xs mb-1">
-    Built with
-    <a
-      class="underline"
-      href="https://gohugo.io/"
-      target="_blank"
-      rel="noopener noreferrer"
-      >Hugo</a
-    >,
-    <a
-      class="underline"
-      href="https://tailwindcss.com/"
-      target="_blank"
-      rel="noopener noreferrer"
-      >Tailwind CSS</a
-    >
-    and
-    <a
-      class="underline"
-      href="https://docker.com/"
-      target="_blank"
-      rel="noopener noreferrer"
-      >Docker</a
-    >
-  </p>
-  <p class="text-center text-slate-400 text-xs">
-    Source available on
-    <a
-      class="underline"
-      href="https://github.com/jimdiroffii/jimdiroffii-dot-com"
-      target="_blank"
-      rel="noopener noreferrer"
-      >GitHub</a
-    >
-    and
-    <a
-      class="underline"
-      href="https://hub.docker.com/repository/docker/jimdtech/jimdiroffii-dot-com/general"
-      target="_blank"
-      rel="noopener noreferrer"
-      >Docker Hub</a
-    >
-  </p>
-</footer>
-
-{{/* Only load the script if a code block was rendered on this page */}}
-{{ if .Page.Store.Get "hasCodeBlock" }}
-  {{ $copyJs := resources.Get "js/copy-button.js" | minify | fingerprint }}
-  <script
-    src="{{ $copyJs.RelPermalink }}"
-    integrity="{{ $copyJs.Data.Integrity }}"
-    defer
-  ></script>
-{{ end }}
+<p class="text-center text-slate-400 text-sm mb-1">
+  &copy; {{ now.Year }} Jim Diroff II
+</p>
+<p class="text-center text-slate-400 text-xs mb-1">
+  Built with
+  <a
+    class="underline"
+    href="https://gohugo.io/"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Hugo</a
+  >,
+  <a
+    class="underline"
+    href="https://tailwindcss.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Tailwind CSS</a
+  >
+  and
+  <a
+    class="underline"
+    href="https://docker.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Docker</a
+  >
+</p>
+<p class="text-center text-slate-400 text-xs">
+  Source available on
+  <a
+    class="underline"
+    href="https://github.com/jimdiroffii/jimdiroffii-dot-com"
+    target="_blank"
+    rel="noopener noreferrer"
+    >GitHub</a
+  >
+  and
+  <a
+    class="underline"
+    href="https://hub.docker.com/repository/docker/jimdtech/jimdiroffii-dot-com/general"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Docker Hub</a
+  >
+</p>
