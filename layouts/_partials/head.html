@@ -29,7 +29,7 @@
 {{ partial "twitter_cards.html" . }}
 
 {{/* Inline styles for loading screen */}}
-{{ partial "loading.html" . }}
+{{ partialCached "loading.html" . }}
 
 {{/* Site styles, deferred for Tailwind */}}
 {{ with (templates.Defer (dict "key" "global")) }}
@@ -37,7 +37,7 @@
 {{ end }}
 
 {{/* KaTeX Stylesheet for Math markup in markdown */}}
-{{/* This doesn't work when included in _partials/css.html */}}
+{{/* This doesn't work when included in _partials/head/css.html */}}
 {{ $noop := .WordCount }}
 {{ if .Page.Store.Get "hasMath" }}
   <link
