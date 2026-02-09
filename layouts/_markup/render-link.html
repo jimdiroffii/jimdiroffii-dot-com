@@ -5,10 +5,6 @@
 {{- $isExternal := and $u.IsAbs $isHTTP (ne $u.Hostname $base.Hostname) -}}
 
 {{/* prettier-ignore-start */}}
-<a href="{{ .Destination | safeURL }}"
-  {{- with .Title }}title="{{ . }}"{{ end -}}{{- if $isExternal }}
-    target="_blank" rel="nofollow noopener noreferrer"
-  {{ end -}}
-  >{{- with .Text }}{{ . }}{{ end -}}{{- if $isExternal }}<span class="sr-only"> (opens in a new tab)</span>{{ end -}}</a>
+<a href="{{ .Destination | safeURL }}"{{- with .Title }}title="{{ . }}"{{ end -}}{{- if $isExternal }}target="_blank" rel="nofollow noopener noreferrer"{{ end -}}>{{- with .Text }}{{ . }}{{ end -}}{{- if $isExternal }}<span class="sr-only"> (opens in a new tab)</span>{{ end -}}</a>
 {{- /* chomp trailing newline */ -}}
 {{/* prettier-ignore-end */}}
