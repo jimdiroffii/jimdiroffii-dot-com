@@ -7,7 +7,7 @@ summary = ''
 
 Software can be crazy. I'm having the same issue from yesterday from Ubuntu. The issue is that my site is not rendering with the Hugo development server. I started poking a bit more at the problem, and found that both Chrome and Firefox were both working fine, but Firefox Dev Edition would not render the site. Specifically, the css file request never finishes. I ended up resetting Firefox Dev, and it appears to be working again. I'm still not sure exactly what the issue was, but my best guess is some type of caching issue. I always develop with `Disable Cache` enabled, but clearly something went wrong while requesting information from the site.
 
-With the browser working again, I can go back to restructing the site layouts.
+With the browser working again, I can go back to restructuring the site layouts.
 
 ## Meta Tags
 
