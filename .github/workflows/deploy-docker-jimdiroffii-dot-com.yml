@@ -41,8 +41,4 @@ jobs:
           host: ${{ secrets.DO_HOST }}
           username: ${{ secrets.DO_USERNAME }}
           key: ${{ secrets.DO_SSH_KEY }}
-          script: |
-            cd /opt/docker/jimdiroffii-dot-com
-            docker compose pull
-            docker compose up -d
-            docker system prune -f
+          script: echo "Triggering deployment script on DigitalOcean"
