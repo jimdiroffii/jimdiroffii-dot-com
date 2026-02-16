@@ -12,3 +12,5 @@ public
 README.md
 LICENSE
 Dockerfile
+
+.prettierrc
