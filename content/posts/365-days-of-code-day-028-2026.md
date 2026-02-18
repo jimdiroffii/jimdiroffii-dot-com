@@ -19,7 +19,7 @@ I'm going to have to keep track of projects on every post, since I seem to keep 
 | Practice Java         | Java          | Paused          | None       | Installed, need to find a good project.                                                                   |
 | Practice Python       | Python        | Paused          | None       | Installed, need to find a good project.                                                                   |
 | PHP Time Tracker      | PHP           | Beta Finished   | None       | Working on a basic level. Could use a couple more updates to make it fully functional.                    |
-| Learn Elixir          | Elixer        | Haven't Started | None       | Installed, need a good tutorial project.                                                                  |
+| Learn Elixir          | Elixir        | Haven't Started | None       | Installed, need a good tutorial project.                                                                  |
 | Learn Haskell         | Haskell       | Haven't Started | None       | Installed, need good tutorial project.                                                                    |
 | Linux+                | N/A           | In-Progress     | 2026-03-31 | Reading Chapter 4.                                                                                        |
 | Cyber Quest 2026      | N/A           | In-Progress     | 2026-02-28 | Finished quiz 1 with 75%. Need to work on ARP poisoning and timestamp adjustments in WireShark.           |
