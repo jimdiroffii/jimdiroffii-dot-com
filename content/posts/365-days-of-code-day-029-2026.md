@@ -220,3 +220,9 @@ Status line: HTTP/1.1 308 Permanent Redirect
 ```
 
 And, it works. We parse the argument, send a request, parse the response, and print the status line to stdout. A fun little experiment with sockets.
+
+## Cookie Banner
+
+I got a call from a client that needed a privacy policy and a cookie banner on their website to meet [GDPR and CCPA](https://www.cookiebot.com/en/ccpa-vs-gdpr/). They are running Wordpress. Let's work on that.
+
+This was actually remarkable simple, due to usage of a Wordpress plugin called [Cookiebot](https://www.cookiebot.com/). Just create an account, use a GDPR template, tie it to the domain, and enable the plugin. About as easy as it gets.
