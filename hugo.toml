@@ -2,12 +2,14 @@
 baseURL = 'https://www.jimdiroffii.com/'
 languageCode = 'en-US'
 title = 'Jim Diroff II'
+enableRobotsTXT = true
+
 
 # Optional Parameters
 [params]
   description = 'Portfolio and Personal Blog for Jim Diroff II'
 
-# This build and module sections currently support Tailwind
+# These build and module sections currently support Tailwind
 [build]
   [build.buildStats]
     enable = true

@@ -16,6 +16,14 @@
   />
 {{- end -}}
 
+
+<meta name="robots" content="follow, index" />
+
+{{/* RSS */}}
+{{ with .OutputFormats.Get "rss" }}
+  {{ printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}
+{{ end }}
+
 {{/* Embedded template for opengraph (this file doesn't exist) */}}
 {{/* https://ogp.me/ */}}
 {{ partial "opengraph.html" . }}
