@@ -2,6 +2,8 @@
 
 [![Deploy Hugo Site](https://github.com/jimdiroffii/jimdiroffii-dot-com/actions/workflows/deploy-docker-jimdiroffii-dot-com.yml/badge.svg)](https://github.com/jimdiroffii/jimdiroffii-dot-com/actions/workflows/deploy-docker-jimdiroffii-dot-com.yml)
 
+[jimdiroffii.com](https://www.jimdiroffii.com)
+
 ## Todo
 
 - [ ] Fix Firefox single-line code block rendering
