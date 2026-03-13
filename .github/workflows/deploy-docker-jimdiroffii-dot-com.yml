@@ -36,7 +36,7 @@ jobs:
           tags: jimdtech/jimdiroffii-dot-com:latest
 
       - name: Deploy to DigitalOcean
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ secrets.DO_HOST }}
           username: ${{ secrets.DO_USERNAME }}
