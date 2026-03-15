@@ -1,7 +1,25 @@
 {{ define "main" }}
   <article>
-    <h1 class="text-4xl font-bold mb-4">{{ .Title }}</h1>
-    <time>{{ .Date.Format "January 2, 2006" }}</time>
+    <h1 class="text-4xl font-bold mb-4 flex justify-center">{{ .Title }}</h1>
+    <div class="mb-2 justify-center flex">
+      <time>{{ .Date.Format "January 2, 2006" }}</time>
+    </div>
+
+    {{ with .Params.tags }}
+      <ul class="flex flex-wrap gap-2 mb-2 justify-center" aria-label="Tags">
+        {{ range . }}
+          <li>
+            <a
+              class="rounded-full border border-white/10 bg-white/90 px-2 py-0.5 text-xs text-slate-800 hover:bg-white/80"
+              href="{{ (printf "/tags/%s/" (. | urlize)) | relURL }}"
+            >
+              {{ . }}
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    {{ end }}
+
 
     <div class="content prose prose-slate prose-invert max-w-none">
       {{ .Content }}

@@ -67,7 +67,7 @@
                   <li>
                     <a
                       class="rounded-full border border-white/10 bg-black/30 px-2 py-0.5 text-xs text-slate-200 hover:bg-white/10"
-                      href="{{ (printf " /tags/%s/" (. | urlize)) | relURL }}"
+                      href="{{ (printf "/tags/%s/" (. | urlize)) | relURL }}"
                     >
                       {{ . }}
                     </a>
