@@ -3,6 +3,7 @@ date = '2026-02-17T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 028'
 summary = ''
+tags = ["365-days-of-code-2026", "hugo", "laravel", "project-euler", "cybersecurity", "time-tracker", "php", "rust", "python", "java"]
 +++
 
 I'm going to have to keep track of projects on every post, since I seem to keep going in different directions every day. Today's work was mostly for a client compliance project. Everything except for code. Here are the projects I am currently tracking, in no particular order:

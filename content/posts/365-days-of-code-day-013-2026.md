@@ -3,6 +3,7 @@ date = '2026-02-02T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 013'
 summary = 'More Project Euler.'
+tags = ["365-days-of-code-2026", "hugo", "project-euler", "c"]
 +++
 
 After yesterday's experience with [Project Euler](https://projecteuler.net), I wanted to keep the momentum going today, and solve the next problem, again with C. I did notice the my LaTeX code blocks are not being rendered, so I'll need to solve that too. I briefly looked at the [Hugo docs](https://gohugo.io/content-management/mathematics/#overview), and there appears to be some built in solutions to try.

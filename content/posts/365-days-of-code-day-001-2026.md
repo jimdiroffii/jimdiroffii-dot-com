@@ -2,6 +2,7 @@
 date = '2026-01-21T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 001'
+tags = ["365-days-of-code-2026", "c", "php", "javascript", "html", "css", "rust", "python", "java", "go"]
 +++
 
 The goal of this challenge is pretty obvious; code every day for a year. I didn't necessarily want to start on the first of the year, as I didn't want the gimmick of a *New Year's Resolution* and I wanted this challenge to stick. I've always enjoyed coding and programming, but I've never stuck with it in long enough stretches to become truly good. Challenging myself to code everyday for a year should hopefully help me get into the habit.

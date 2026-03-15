@@ -2,6 +2,7 @@
 date = '2026-01-25T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 005'
+tags = ["365-days-of-code-2026", "hugo", "laravel", "self-hosting", "fail2ban", "astro", "php", "html"]
 +++
 
 More administration work today. I needed a new webserver, as my old AWS server was deleted because I accidentally left it as a spot instance. I started a new DigitalOcean server to give their service a fair shot. This lead me to setting up a private instance of [Gitea](https://about.gitea.com/) on my local server to start a repo for server configurations that I do not want to post on the public internet (Github). That further led me down a rabbit hole where I found out my development server could not see any [Tailscale](https://tailscale.com/) machines due to a DNS issue. Once again, none of this is technically code, so I need to find something else to work on. I'm already a few days out from the last time I worked on my Laravel tutorial, and associated sites, so I need to get cranking on that. First, I need to get my new Personal Relationship Manager repo up to date.

@@ -3,6 +3,7 @@ date = '2026-02-04T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 015'
 summary = 'About Page, Math Rendering with KaTeX, new PR in cspell-dicts'
+tags = ["365-days-of-code-2026", "hugo", "project-euler", "javascript", "html"]
 +++
 
 Today, I came back to [Hugo](https://gohugo.io/), to give the site a bit more polish. The first order of business was to create an [About](https://test.jimdiroffii.com/about) page with some details on me and my history. I'm using this site on my resumes, and it is nice to give a bit more detail about my history beyond what fits on a typical resume or cover letter.

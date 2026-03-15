@@ -3,6 +3,7 @@ date = '2026-01-27T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 007'
 summary = 'Getting started with Hugo'
+tags = ["365-days-of-code-2026", "hugo", "docker", "github-actions", "nginx", "self-hosting", "shell-scripting", "tailwindcss", "frontend-ux", "git"]
 +++
 
 Today's goal is to get started with [Hugo](https://gohugo.io). Hugo is a static site generator (SSG) written in Go, and markets itself as the fastest framework for building websites. I liked the idea of Hugo for several reasons.

@@ -3,6 +3,7 @@ date = '2026-02-14T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 025'
 summary = ''
+tags = ["365-days-of-code-2026", "hugo", "laravel", "project-euler", "shell-scripting", "c", "php", "rust", "python", "go"]
 +++
 
 I took some of the Laravel lessons from yesterday, and applied them to another project I'm working on for a client. I also got that project pushed up to Github into a private repository. It is definitely helpful to take the lessons from a tutorial and immediately apply them to other projects. I need to remember this when it comes to working on learning the other languages, such as Go, Rust and Haskell.

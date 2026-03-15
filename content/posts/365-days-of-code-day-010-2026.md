@@ -3,6 +3,7 @@ date = '2026-01-30T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 010'
 summary = 'Mobile hamburgers... mmm'
+tags = ["365-days-of-code-2026", "tailwindcss", "accessibility", "responsive-design", "javascript", "html", "css"]
 +++
 
 Today's code was simple, get the mobile layout configuration set. Most importantly, can we configured a mobile-style hamburger menu using CSS only? Yes, for the most part. One UI feature missing is that if you click the hamburger menu, it will stay open unless you click a button to close it. Since there is no JavaScript, there is no detection for clicks elsewhere on the page. I was willing to give up that functionality, and added a button to close the menu.

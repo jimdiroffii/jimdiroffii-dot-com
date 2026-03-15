@@ -2,6 +2,7 @@
 date = '2026-01-22T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 002'
+tags = ["365-days-of-code-2026", "laravel", "vim", "time-tracker", "php"]
 +++
 
 The second day of coding went fairly productive. I worked on the [Laravel From Scratch 2026](https://laracasts.com/series/laravel-from-scratch-2026) series, a [new vimrc file](https://github.com/jimdiroffii/dotfiles/blob/main/.vimrc), a prototype website for a client, and vibe coded a [PHP time tracker](https://github.com/jimdiroffii/time-tracker).

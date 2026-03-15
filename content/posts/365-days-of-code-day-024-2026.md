@@ -3,6 +3,7 @@ date = '2026-02-13T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 024'
 summary = ''
+tags = ["365-days-of-code-2026", "laravel", "php"]
 +++
 
 Let's get back to the beginning of this challenge, Laravel. I have a few Laravel projects on the burner. One of them is an educational project, tied to the [Laravel From Scratch (2026)](https://laracasts.com/series/laravel-from-scratch-2026/) series on Laracasts. Laravel moves relatively fast, and despite having done this series on an earlier version of Laravel, I could use the refresh. Onto Episode 5, _Pass Data to Views_.

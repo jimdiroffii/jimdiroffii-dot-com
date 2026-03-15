@@ -2,6 +2,7 @@
 date = '2026-01-23T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 003'
+tags = ["365-days-of-code-2026", "laravel", "docker", "self-hosting", "shell-scripting", "devops", "time-tracker", "php", "bash", "zsh"]
 +++
 
 Day 3 was a little less productive for coding. I mostly did administrative work to start the day. Working with docker, working with shells, updating PCs, synchronizing files, etc. I wanted to add another project to my [Laravel](https://laravel.com/) tutorial. I have been wanting a personal management system for a long time. The only one I know of that exists is called [Monica](https://www.monicahq.com/). It was ok, and did what I needed it to do on a basic level. However, I was not a fan of the interface. The developers were also not working on the application full-time, while trying to migrate the entire system over to a new version called Chandler. They have put in a tremendous effort, but I think I can make one on my own.
