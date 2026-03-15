@@ -56,11 +56,11 @@ This does add my first external runtime dependency to the site. We are fetching 
 
 ### Math Render Example
 
-This is an inline \(a^_=x-b^_\) equation.
+This is an inline \(a^*=x-b^*\) equation.
 
 These are block equations:
 
-\[a^_=x-b^_\]
+\[a^*=x-b^*\]
 
 $$a^*=x-b^*$$
 
