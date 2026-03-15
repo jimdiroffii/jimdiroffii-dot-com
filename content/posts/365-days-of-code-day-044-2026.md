@@ -3,6 +3,7 @@ date = '2026-03-05T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 044'
 summary = ''
+tags = ["365-days-of-code-2026", "docker", "caddy", "github-actions", "nginx", "self-hosting", "shell-scripting", "git", "devops", "discinox"]
 +++
 
 ## Project Status

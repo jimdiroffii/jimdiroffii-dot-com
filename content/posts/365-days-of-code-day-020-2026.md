@@ -3,6 +3,7 @@ date = '2026-02-09T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 020'
 summary = ''
+tags = ["365-days-of-code-2026", "hugo", "shell-scripting", "html", "css", "bash"]
 +++
 
 I found that yesterday's detected issue with single line code blocks has been experienced by people in the past, and this issue is only on Firefox. Chrome does not have this issue. I'm going to reproduce it in as simple of manner as possible, and report this as an issue.

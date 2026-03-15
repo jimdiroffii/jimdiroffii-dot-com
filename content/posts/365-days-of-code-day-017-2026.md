@@ -3,6 +3,7 @@ date = '2026-02-06T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 017'
 summary = ''
+tags = ["365-days-of-code-2026", "hugo", "shell-scripting", "tailwindcss", "css", "bash"]
 +++
 
 Day 17. Things have been going pretty well. Other than class work, this is one of my most consistent streaks of getting things done. The value of what I have done so far could be debated, but it is something I've wanted to do for a long time. Here I am! Blogging like it is 2006 and not 2026! I've been reviewing the site files, and found some inconsistencies with the styling. There are some more features that I want to add, such as tagging/categorization of posts, project cards, side bars, footer navigation, social links, and more. However, I blasted through the development of this new site, and was learning Hugo as I went along. Therefore, I've ended up with some technical debt in the page templates that I want to get in order before adding more features.

@@ -3,6 +3,7 @@ date = '2026-02-01T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 012'
 summary = 'Blogging and fun with Project Euler!'
+tags = ["365-days-of-code-2026", "hugo", "project-euler", "self-hosting", "shell-scripting", "vim", "c", "python", "java", "bash"]
 +++
 
 With the core Hugo configuration finished today, I copied over the blog posts from previous days. Along with some additional formatting in Markdown, this blog is now setup, and my personal site is live. I'm still on the `test` subdomain, so I need to switch the over, but let's work on some C code instead.

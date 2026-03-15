@@ -3,6 +3,7 @@ date = '2026-02-05T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 016'
 summary = 'Site is live!'
+tags = ["365-days-of-code-2026", "hugo", "project-euler", "caddy", "self-hosting", "shell-scripting", "astro", "netlify", "devops", "c"]
 +++
 
 I finally migrated my primary domain over to this new [Hugo](https://gohugo.io/) site. Previously I was deploying an [Astro](https://astro.build/) project to [Netlify](https://www.netlify.com/), but Astro just wasn't the right solution for me. I'm happy with the state this new Hugo site is in currently. It is "good enough." At least for now, there are still a lot of changes that I would like to make. Spruce up this place a bit. Perhaps if you are reading this, the site has already been migrated to a later version and looks perfect! At this point, the styling is still very simple. Dark background, light text, no sidebars or truly custom components. A good start.

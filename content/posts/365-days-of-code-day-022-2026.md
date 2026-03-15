@@ -3,6 +3,7 @@ date = '2026-02-11T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 022'
 summary = ''
+tags = ["365-days-of-code-2026", "project-euler", "shell-scripting", "c", "rust", "python", "java", "go", "elixir", "haskell"]
 +++
 
 I finished up [Problem 20](https://projecteuler.net/problem=20) this morning. I went well beyond what was needed to find the solution, but this is all just practice. I tried to be as defensive as possible, validate everything, and provide options for alternative numbers. The program can run for factorial values well beyond 100!. Although, the program gets quite slow once you are into the really large factorials.

@@ -2,6 +2,7 @@
 date = '2026-01-24T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 004'
+tags = ["365-days-of-code-2026", "responsive-design", "coding-challenge"]
 +++
 
 I installed a new [MariaDB](https://mariadb.org/) container in my local server, to support local databases. Primarily, I wanted to install [Monica](https://www.monicahq.com/) in a container, and required a database to set up Monica. I ran into some headaches when I could not log in as the root user into my new database container. Turns out, I had previously installed MariaDB, and had a persistent store with data already in it. I had to delete the persistent store and start fresh. Once that was done, the issue was easily resolved and I spun up the new Monica instance.

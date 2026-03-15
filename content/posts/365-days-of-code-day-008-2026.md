@@ -3,6 +3,7 @@ date = '2026-01-28T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 008'
 summary = 'What The FOUC: Building a Smarter Loading Screen'
+tags = ["365-days-of-code-2026", "hugo", "frontend-ux", "accessibility", "javascript", "html", "css"]
 +++
 
 A "flash of unstyled content" or FOUC can be particularly jarring for users. I noticed when I was building out this new Hugo site, that when I throttled the connection to GPRS, the FOUC from the stylesheet not loading was particularly nasty.

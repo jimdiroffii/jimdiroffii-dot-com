@@ -3,6 +3,7 @@ date = '2026-02-07T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 018'
 summary = ''
+tags = ["365-days-of-code-2026", "hugo", "coding-challenge"]
 +++
 
 I'm trying to make a decision here. After yesterday's new understanding of how [Hugo Sections](https://cloudcannon.com/blog/the-ultimate-guide-to-hugo-sections/) work, I want to restructure this site a little bit. I always knew I was going to rework some areas, such as the names of these blog posts, but now I want to reconfigure everything from scratch again. The baseline template theme from yesterday gave me some good ideas for a new structure. I've also already had to go back and fix some template issues in this code base. So, now that I know what I'm doing (at least a little bit better), I should be able to avoid some mistakes and get this site structured better for the long term.
