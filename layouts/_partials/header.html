@@ -3,9 +3,8 @@
   aria-label="Primary"
 >
   {{- $brand := or site.Title "Jim Diroff II" -}}
-  <a href="https://www.jimdiroffii.com" class="text-lg font-bold">
-    {{ $brand }}
-  </a>
+  {{- $home := "/" | relLangURL -}}
+  <a href="{{ $home }}" class="text-lg font-bold"> {{ $brand }} </a>
 
   {{- $links := slice
     (dict "name" "Home" "url" "/")
