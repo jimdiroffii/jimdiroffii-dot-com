@@ -3,7 +3,7 @@ date = '2026-02-04T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 015'
 summary = 'About Page, Math Rendering with KaTeX, new PR in cspell-dicts'
-tags = ["365-days-of-code-2026", "hugo", "project-euler", "javascript", "html"]
+tags = ["365-days-of-code-2026", "hugo", "latex", "katex"]
 +++
 
 Today, I came back to [Hugo](https://gohugo.io/), to give the site a bit more polish. The first order of business was to create an [About](https://test.jimdiroffii.com/about) page with some details on me and my history. I'm using this site on my resumes, and it is nice to give a bit more detail about my history beyond what fits on a typical resume or cover letter.
@@ -25,7 +25,7 @@ layout = "about"
 
 Template:
 
-```html
+```go
 {{ define "main" }}
 <main class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12">
   <header class="mb-10 text-center">
@@ -50,17 +50,17 @@ There are two different ways of rendering math in Hugo. The first is using the [
 
 A note on KaTeX. This is a really impressive JS library. Frequently updated (as of Feb 2026), clean test suite, readable commit history, compatible across all browsers, based on industry standard TeX, and server side rendering to HTML. All JS packages should aspire to be more like KaTeX.
 
-The [Hugo docs](https://gohugo.io/functions/transform/tomath/) explain all the steps required to render math comprehensively. The implementation was straightforward, but I did have to change how I do things a bit. I had created `_partials` for `head.html` and `css.html` when I was originally building out the layout. I couldn't get the KaTeX stylesheet to render onto the page without placing the statements directly into the `baseof.html` file. Meaning, I had to remove the `head.html`, and now have a stylesheet condition that is *not* in the `css.html` file. I'll live with this for now, because it works. I also had to disable formatting on the `layouts/_markup/render-passthrough.html` file, since it has a really long error line, and the formatter was adding a line break. Disabling formatting was the easiest workaround, instead of trying to figure out how to ignore that one file.
+The [Hugo docs](https://gohugo.io/functions/transform/tomath/) explain all the steps required to render math comprehensively. The implementation was straightforward, but I did have to change how I do things a bit. I had created `_partials` for `head.html` and `css.html` when I was originally building out the layout. I couldn't get the KaTeX stylesheet to render onto the page without placing the statements directly into the `baseof.html` file. Meaning, I had to remove the `head.html`, and now have a stylesheet condition that is _not_ in the `css.html` file. I'll live with this for now, because it works. I also had to disable formatting on the `layouts/_markup/render-passthrough.html` file, since it has a really long error line, and the formatter was adding a line break. Disabling formatting was the easiest workaround, instead of trying to figure out how to ignore that one file.
 
 This does add my first external runtime dependency to the site. We are fetching the KaTeX style sheet and font files when the page loads for the client. It adds 49.58 kB to the request load. I may pull these in locally later. The KaTeX stylesheet is versioned, so the version I'm pulling could break, preventing the math from rendering properly. A TODO for later.
 
 ### Math Render Example
 
-This is an inline \(a^*=x-b^*\) equation.
+This is an inline \(a^_=x-b^_\) equation.
 
 These are block equations:
 
-\[a^*=x-b^*\]
+\[a^_=x-b^_\]
 
 $$a^*=x-b^*$$
 

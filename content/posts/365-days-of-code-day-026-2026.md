@@ -3,7 +3,7 @@ date = '2026-02-15T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 026'
 summary = 'Hardening Server Deployments: Securing GitHub Actions with Least Privilege'
-tags = ["365-days-of-code-2026", "docker", "github-actions", "self-hosting", "fail2ban", "shell-scripting", "devops", "bash"]
+tags = ["365-days-of-code-2026", "permissions", "fail2ban", "devops", "bash"]
 +++
 
 I checked on my webserver today, just to read logs, verify logins, review bans, and perform maintenance. I noticed a configuration mistake, and got to work correcting it.

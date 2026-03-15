@@ -3,7 +3,7 @@ date = '2026-02-16T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 027'
 summary = ''
-tags = ["365-days-of-code-2026", "self-hosting", "fail2ban", "cybersecurity", "shell-scripting", "html", "bash"]
+tags = ["365-days-of-code-2026", "fail2ban", "cybersecurity", "wireshark", "cyber-quest-spring-2026"]
 +++
 
 Following up from yesterday's server administration, I checked on my recidive jail, and found that no clients had been banned. This was clearly an error since I could manually check the logs and see many repeat offenders. There was one change I had to make to the configuration.

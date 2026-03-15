@@ -3,7 +3,7 @@ date = '2026-01-28T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 008'
 summary = 'What The FOUC: Building a Smarter Loading Screen'
-tags = ["365-days-of-code-2026", "hugo", "frontend-ux", "accessibility", "javascript", "html", "css"]
+tags = ["365-days-of-code-2026", "hugo", "frontend-ux", "accessibility", "html", "css"]
 +++
 
 A "flash of unstyled content" or FOUC can be particularly jarring for users. I noticed when I was building out this new Hugo site, that when I throttled the connection to GPRS, the FOUC from the stylesheet not loading was particularly nasty.
@@ -33,15 +33,21 @@ Here is what the CSS looked like in my `css.html` partial:
 ```css
 .spinner {
   opacity: 0;
-  animation: spin 1s linear infinite, fadeIn 0.4s ease-out 0.5s forwards;
+  animation:
+    spin 1s linear infinite,
+    fadeIn 0.4s ease-out 0.5s forwards;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes fadeIn {
-  to { opacity: 1; }
+  to {
+    opacity: 1;
+  }
 }
 ```
 
@@ -57,8 +63,8 @@ I also added some text so it wasn't just a mysterious floating circle.
 
 ```html
 <div id="loading-screen" aria-hidden="true" class="...">
-    <div class="spinner"></div>
-    <div class="loading-text">Loading...</div>
+  <div class="spinner"></div>
+  <div class="loading-text">Loading...</div>
 </div>
 ```
 
@@ -71,7 +77,7 @@ I also noticed the contrast on the "track" of the spinner was too faint against 
   .spinner {
     animation: none;
     border-color: #fff;
-    opacity: 1; 
+    opacity: 1;
   }
   .loading-text {
     animation: none;
@@ -88,7 +94,11 @@ HTML within the `<body>` tag:
 
 ```html
 <!-- Note that the class is using TailwindCSS -->
-<div id="loading-screen" aria-hidden="true" class="opacity-0 pointer-events-none transition-opacity duration-300 ease-out">
+<div
+  id="loading-screen"
+  aria-hidden="true"
+  class="opacity-0 pointer-events-none transition-opacity duration-300 ease-out"
+>
   <div class="spinner"></div>
   <div class="loading-text">Loading...</div>
 </div>
@@ -113,7 +123,7 @@ HTML within the `<head>` tag:
     z-index: 9999;
     pointer-events: none;
   }
-  
+
   .spinner {
     width: clamp(30px, 8vmin, 80px);
     height: clamp(30px, 8vmin, 80px);
@@ -121,25 +131,40 @@ HTML within the `<head>` tag:
     border-top-color: #fff;
     border-radius: 50%;
     opacity: 0;
-    animation: spin 1s linear infinite, fadeIn 0.4s ease-out 0.5s forwards;
+    animation:
+      spin 1s linear infinite,
+      fadeIn 0.4s ease-out 0.5s forwards;
   }
 
   .loading-text {
     color: #e2e8f0;
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family:
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      Arial,
+      sans-serif;
     font-size: 1rem;
     font-weight: 500;
     letter-spacing: 0.05em;
     opacity: 0;
     animation: fadeIn 0.4s ease-out 0.5s forwards;
   }
-  
+
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   @keyframes fadeIn {
-    to { opacity: 1; }
+    to {
+      opacity: 1;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -3,7 +3,7 @@ date = '2026-01-26T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 006'
 summary = 'Migrating to Caddy, Docker configuration, and testing Github Actions workflow'
-tags = ["365-days-of-code-2026", "docker", "caddy", "github-actions", "nginx", "self-hosting", "git", "devops"]
+tags = ["365-days-of-code-2026", "docker", "caddy", "github-actions", "nginx", "self-hosting", "git", "devops", "http3"]
 +++
 
 ## Introduction
@@ -17,13 +17,13 @@ The Caddy setup was quick and easy. Both the Docker Compose file and the Caddyfi
 ```yaml
 services:
   app:
-    image: 'caddy:latest'
+    image: "caddy:latest"
     container_name: caddy
     restart: unless-stopped
     ports:
-      - '80:80'
-      - '443:443'
-      - '443:443/udp'
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - ./caddy_data:/data/caddy
@@ -66,7 +66,7 @@ services:
     container_name: test-app
     restart: unless-stopped
     expose:
-      - '80'
+      - "80"
     networks:
       - web-public
 
@@ -82,9 +82,9 @@ name: Build and Push to Docker Hub
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
     paths-ignore:
-      - 'README.md'
+      - "README.md"
 
 jobs:
   build:

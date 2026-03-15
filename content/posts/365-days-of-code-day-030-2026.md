@@ -3,7 +3,7 @@ date = '2026-02-19T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 030'
 summary = ''
-tags = ["365-days-of-code-2026", "hugo", "laravel", "php"]
+tags = ["365-days-of-code-2026", "laravel", "php"]
 +++
 
 ## Project Status

@@ -3,7 +3,7 @@ date = '2026-01-27T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 007'
 summary = 'Getting started with Hugo'
-tags = ["365-days-of-code-2026", "hugo", "docker", "github-actions", "nginx", "self-hosting", "shell-scripting", "tailwindcss", "frontend-ux", "git"]
+tags = ["365-days-of-code-2026", "hugo", "docker", "github-actions", "nginx", "self-hosting", "tailwindcss", "frontend-ux"]
 +++
 
 Today's goal is to get started with [Hugo](https://gohugo.io). Hugo is a static site generator (SSG) written in Go, and markets itself as the fastest framework for building websites. I liked the idea of Hugo for several reasons.
@@ -18,7 +18,7 @@ Ignoring my reliance on Tailwind for development, Hugo doesn't require any depen
 
 ## Built-in Dev Server
 
-Sure, PHP has a built-in server, and hot-reloading with Vite is pretty cool, but the Hugo development server works great and doesn't require any additional configuration. I like tight feedback loops: change a file, refresh, repeat. Hugo’s dev server makes that feel instant, and that encourages me to write more, tweak more, and iterate more. I’m not staring at a bundler spinner wondering what it’s doing this *this* time.
+Sure, PHP has a built-in server, and hot-reloading with Vite is pretty cool, but the Hugo development server works great and doesn't require any additional configuration. I like tight feedback loops: change a file, refresh, repeat. Hugo’s dev server makes that feel instant, and that encourages me to write more, tweak more, and iterate more. I’m not staring at a bundler spinner wondering what it’s doing this _this_ time.
 
 ## Markdown Native
 
@@ -35,33 +35,46 @@ A base installation of Hugo comes with practically no configuration, and doesn't
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>{{ .Title }} | Jim Diroff II</title>
     <style>
-        body { max-width: 800px; margin: 0 auto; font-family: sans-serif; line-height: 1.6; padding: 20px; }
-        header, nav { margin-bottom: 40px; }
-        a { color: #007bff; text-decoration: none; }
-        code { background: #f4f4f4; padding: 2px 5px; }
+      body {
+        max-width: 800px;
+        margin: 0 auto;
+        font-family: sans-serif;
+        line-height: 1.6;
+        padding: 20px;
+      }
+      header,
+      nav {
+        margin-bottom: 40px;
+      }
+      a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      code {
+        background: #f4f4f4;
+        padding: 2px 5px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <nav>
-            <a href="/"><strong>Home</strong></a> | 
-            <a href="/posts/">Blog</a>
-        </nav>
+      <nav>
+        <a href="/"><strong>Home</strong></a> |
+        <a href="/posts/">Blog</a>
+      </nav>
     </header>
 
-    <main>
-        {{ block "main" . }}{{ end }}
-    </main>
+    <main>{{ block "main" . }}{{ end }}</main>
 
     <footer>
-        <hr>
-        <p>&copy; 2026 Jim Diroff II</p>
+      <hr />
+      <p>&copy; 2026 Jim Diroff II</p>
     </footer>
-</body>
+  </body>
 </html>
 ```
 
@@ -70,12 +83,10 @@ A base installation of Hugo comes with practically no configuration, and doesn't
 ```html
 {{ define "main" }}
 <article>
-    <h1>{{ .Title }}</h1>
-    <time>{{ .Date.Format "January 2, 2006" }}</time>
-    
-    <div class="content">
-        {{ .Content }}
-    </div>
+  <h1>{{ .Title }}</h1>
+  <time>{{ .Date.Format "January 2, 2006" }}</time>
+
+  <div class="content">{{ .Content }}</div>
 </article>
 {{ end }}
 ```
@@ -84,16 +95,16 @@ A base installation of Hugo comes with practically no configuration, and doesn't
 
 ```html
 {{ define "main" }}
-    <h1>{{ .Title }}</h1>
-    
-    <ul>
-        {{ range .Pages }}
-        <li>
-            <a href="{{ .Permalink }}">{{ .Title }}</a>
-            <small>({{ .Date.Format "2006-01-02" }})</small>
-        </li>
-        {{ end }}
-    </ul>
+<h1>{{ .Title }}</h1>
+
+<ul>
+  {{ range .Pages }}
+  <li>
+    <a href="{{ .Permalink }}">{{ .Title }}</a>
+    <small>({{ .Date.Format "2006-01-02" }})</small>
+  </li>
+  {{ end }}
+</ul>
 {{ end }}
 ```
 
@@ -152,7 +163,7 @@ services:
     container_name: jimdiroffii-dot-com
     restart: unless-stopped
     expose:
-      - '80'
+      - "80"
     networks:
       - web-public
 
@@ -168,14 +179,14 @@ name: Deploy Hugo Site
 
 on:
   push:
-    branches: [ "hugo" ]
+    branches: ["hugo"]
     paths-ignore:
-      - 'README.md'
-      - '.gitattributes'
-      - '.gitignore'
-      - '.vscode/**'
-      - 'LICENSE'
-      - '.idea/**'
+      - "README.md"
+      - ".gitattributes"
+      - ".gitignore"
+      - ".vscode/**"
+      - "LICENSE"
+      - ".idea/**"
 
 jobs:
   build-and-deploy:
@@ -210,13 +221,13 @@ jobs:
           script: |
             # Navigate to the project directory
             cd /opt/docker/jimdiroffii-dot-com
-            
+
             # Pull the new image we just pushed
             docker compose pull
-            
+
             # Recreate the container with the new image
             docker compose up -d
-            
+
             # Clean up old images to save disk space
             docker system prune -f
 ```

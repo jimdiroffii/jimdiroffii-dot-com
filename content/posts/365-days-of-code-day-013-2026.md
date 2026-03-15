@@ -3,7 +3,7 @@ date = '2026-02-02T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 013'
 summary = 'More Project Euler.'
-tags = ["365-days-of-code-2026", "hugo", "project-euler", "c"]
+tags = ["365-days-of-code-2026", "project-euler", "c"]
 +++
 
 After yesterday's experience with [Project Euler](https://projecteuler.net), I wanted to keep the momentum going today, and solve the next problem, again with C. I did notice the my LaTeX code blocks are not being rendered, so I'll need to solve that too. I briefly looked at the [Hugo docs](https://gohugo.io/content-management/mathematics/#overview), and there appears to be some built in solutions to try.
@@ -20,9 +20,9 @@ Today's problem summary is as follows:
 
 The [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_sequence) is quite famous. It often starts with `0` and `1` (although Fibonacci started with `1` and `2`), and these numbers are summed to create our first Fibonacci number, `1`. Now, we have `0`, `1`, `1`. Add the last two digits, and now we have our `2`. This cycle repeats forever.
 
-One of my favorite movies, [*Pi*](https://www.imdb.com/title/tt0138704/), references the Fibonacci sequence as part of the plot.
+One of my favorite movies, [_Pi_](https://www.imdb.com/title/tt0138704/), references the Fibonacci sequence as part of the plot.
 
-So, we have a Fibonacci problem, which is commonly solved with recursion in Computer Science classes. But, we also have an additional constraint, which is to sum *only* the even numbers.
+So, we have a Fibonacci problem, which is commonly solved with recursion in Computer Science classes. But, we also have an additional constraint, which is to sum _only_ the even numbers.
 
 An interesting fact about the Fibonacci sequence is that even numbers show up for every third term. We ignore `0`, as that is neither even nor odd, and start with `1`, `1`, which is `odd`, `odd`. These numbers add up to `2`, which is `even`, and the cycle repeats.
 

@@ -3,12 +3,12 @@ date = '2026-02-05T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 016'
 summary = 'Site is live!'
-tags = ["365-days-of-code-2026", "hugo", "project-euler", "caddy", "self-hosting", "shell-scripting", "astro", "netlify", "devops", "c"]
+tags = ["365-days-of-code-2026", "project-euler", "c"]
 +++
 
 I finally migrated my primary domain over to this new [Hugo](https://gohugo.io/) site. Previously I was deploying an [Astro](https://astro.build/) project to [Netlify](https://www.netlify.com/), but Astro just wasn't the right solution for me. I'm happy with the state this new Hugo site is in currently. It is "good enough." At least for now, there are still a lot of changes that I would like to make. Spruce up this place a bit. Perhaps if you are reading this, the site has already been migrated to a later version and looks perfect! At this point, the styling is still very simple. Dark background, light text, no sidebars or truly custom components. A good start.
 
-Updating a Caddyfile isn't enough to justify this day within the context of my *365 Days of Code* project, so I need to find something to work on before the clock strikes 12.
+Updating a Caddyfile isn't enough to justify this day within the context of my _365 Days of Code_ project, so I need to find something to work on before the clock strikes 12.
 
 ## Project Euler - Problem 16 - Power Digit Sum
 
@@ -75,7 +75,7 @@ Result as string: 32768
 Sum is: 26
 ```
 
-> Note the usage of `-lm` as a flag. The math library (`libm`) is not linked automatically by `gcc` on Linux. To utilize the `math.h` header, the *Link Math* flag must be added as a compilation option.
+> Note the usage of `-lm` as a flag. The math library (`libm`) is not linked automatically by `gcc` on Linux. To utilize the `math.h` header, the _Link Math_ flag must be added as a compilation option.
 
 So, we understand how to convert a number to a string, and then split the string into characters, convert those characters to integers, and add them together. However, this didn't really help us solve the real problem. What are we going to do with a 300+ digit number?
 
@@ -201,4 +201,4 @@ Output:
 1366
 ```
 
-This was illuminating. The carry method allows for simple multiplication, and the digits are stored in reverse order. Every time we perform another multiplication, we have to work through the array, but we can store a result of arbitrary length. An interesting technique that I hadn't seen before. 🎵 *[The More You Know...](https://en.wikipedia.org/wiki/The_More_You_Know)* 🎵
+This was illuminating. The carry method allows for simple multiplication, and the digits are stored in reverse order. Every time we perform another multiplication, we have to work through the array, but we can store a result of arbitrary length. An interesting technique that I hadn't seen before. 🎵 _[The More You Know...](https://en.wikipedia.org/wiki/The_More_You_Know)_ 🎵

@@ -3,7 +3,7 @@ date = '2026-02-03T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 014'
 summary = 'More Project Euler.'
-tags = ["365-days-of-code-2026", "laravel", "project-euler", "self-hosting", "shell-scripting", "git", "c", "php", "bash"]
+tags = ["365-days-of-code-2026", "project-euler", "valgrind", "c"]
 +++
 
 Day 3 of [Project Euler](https://projecteuler.net/). Coding is addicting. Building web apps is semi-addicting. I need to get back on the [Laravel](https://laravel.com/) train, and move my primary domain over here, but let's solve another problem first. I also need to fix that math rendering... Onward to [Problem 3](https://projecteuler.net/problem=3) from Project Euler!
@@ -503,9 +503,9 @@ We got our correct answer of `6857`.
 
 ## Afterthoughts (Bug Squishing)
 
-I actually had two bugs in my code. One caused leaked memory, and the other was an *uninitialized value created by heap allocation*. The corrected code was updated above, but you check [this commit](https://github.com/jimdiroffii/jimdiroffii-dot-com/commit/b8cb5ac006322fdd2794e9aed0ef8d0c18fd4393) to see the problem code.
+I actually had two bugs in my code. One caused leaked memory, and the other was an _uninitialized value created by heap allocation_. The corrected code was updated above, but you check [this commit](https://github.com/jimdiroffii/jimdiroffii-dot-com/commit/b8cb5ac006322fdd2794e9aed0ef8d0c18fd4393) to see the problem code.
 
-- **Uninitialized sentinel in the prime-check path:** when `isPrimeCheck == TRUE`, my function only writes `factors[0] = -1` when it finds a divisor. If the number is prime, that branch never fires, so `factors[0]` is never initialized. I was *accidentally* treating whatever garbage happened to be in malloc’d memory as meaningful — undefined behavior. The fix was to explicitly set `factors[0] = 0` right after allocation (assume prime until proven otherwise).
+- **Uninitialized sentinel in the prime-check path:** when `isPrimeCheck == TRUE`, my function only writes `factors[0] = -1` when it finds a divisor. If the number is prime, that branch never fires, so `factors[0]` is never initialized. I was _accidentally_ treating whatever garbage happened to be in malloc’d memory as meaningful — undefined behavior. The fix was to explicitly set `factors[0] = 0` right after allocation (assume prime until proven otherwise).
 
 - **Leak from overwriting a pointer in a loop:** my prime-check loop called `factor()` each iteration (which `malloc`s), stored the result in `primeFactors`, and only called `free()` once at the end. Each new assignment overwrote the previous pointer, so the earlier allocations became unreachable and leaked. The fix was to `free(primeFactors)` before assigning a new buffer (or redesign the prime check to not allocate at all).
 

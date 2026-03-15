@@ -3,14 +3,14 @@ date = '2026-02-01T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 012'
 summary = 'Blogging and fun with Project Euler!'
-tags = ["365-days-of-code-2026", "hugo", "project-euler", "self-hosting", "shell-scripting", "vim", "c", "python", "java", "bash"]
+tags = ["365-days-of-code-2026", "project-euler", "c"]
 +++
 
 With the core Hugo configuration finished today, I copied over the blog posts from previous days. Along with some additional formatting in Markdown, this blog is now setup, and my personal site is live. I'm still on the `test` subdomain, so I need to switch the over, but let's work on some C code instead.
 
 ## Setup C
 
-I haven't written any C in awhile, so I need to check if my system is ready to compile it. I'll write up a *hello, world!* app to test compilation.
+I haven't written any C in awhile, so I need to check if my system is ready to compile it. I'll write up a _hello, world!_ app to test compilation.
 
 ```c
 #include <stdio.h>
@@ -167,7 +167,7 @@ where
 
 $$m = \frac{N-1}{k}$$
 
-We need to add the multiples of both `3` and `5` though, so we have one issue. We will double count all numbers that are multiples of both `3` and `5`. We resolve this by subtracting the sum of the lowest common multiple (`LCM`) of `3` and `5`, which is `15`, `N` times. This is known as the *inclusion-exclusion* principle.
+We need to add the multiples of both `3` and `5` though, so we have one issue. We will double count all numbers that are multiples of both `3` and `5`. We resolve this by subtracting the sum of the lowest common multiple (`LCM`) of `3` and `5`, which is `15`, `N` times. This is known as the _inclusion-exclusion_ principle.
 
 If you haven't caught on yet, we have changed our algorithm from a simple naive approach of iterating over every value and performing a sum, to a few simple multiplication problems with a single sum operation at the end. We could do this math easily by hand.
 

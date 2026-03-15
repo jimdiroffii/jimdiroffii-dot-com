@@ -3,22 +3,22 @@ date = '2026-01-29T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 009'
 summary = 'git-lfs, CSS, and more'
-tags = ["365-days-of-code-2026", "hugo", "github-actions", "tailwindcss", "accessibility", "git", "devops", "javascript", "html", "css"]
+tags = ["365-days-of-code-2026", "hugo", "github-actions", "tailwindcss", "git", "devops", "javascript", "html", "css"]
 +++
 
 Still working on the new Hugo site. Today is all about styling and fine-tuning.
 
 ## git-lfs
 
-Any binary file included in a git repo should be tracked using lfs (large file storage). While the favicon for the site isn't really a large file, it serves as a good test to ensure lfs is working correctly. *Spoiler* It wasn't. In order to deploy container images properly, lfs needs to be included in the workflow actions file, otherwise, you just get the file pointer.
+Any binary file included in a git repo should be tracked using lfs (large file storage). While the favicon for the site isn't really a large file, it serves as a good test to ensure lfs is working correctly. _Spoiler_ It wasn't. In order to deploy container images properly, lfs needs to be included in the workflow actions file, otherwise, you just get the file pointer.
 
 ```yaml
 steps:
-      - name: Check out the repo
-        uses: actions/checkout@v4
-        with:
-          lfs: true
-          fetch-depth: 0
+  - name: Check out the repo
+    uses: actions/checkout@v4
+    with:
+      lfs: true
+      fetch-depth: 0
 ```
 
 ## Tailwind CSS / Typography / Prose / Code Blocks
@@ -29,7 +29,6 @@ First, the CSS changes in `assets/css/main.css`:
 
 ```css
 @layer components {
-
   /*** 
    * Markdown code block start
    */
@@ -53,7 +52,7 @@ First, the CSS changes in `assets/css/main.css`:
 
   .code-block .highlight,
   .code-block .chroma,
-  .code-block .highlight>div,
+  .code-block .highlight > div,
   .code-block .chroma pre {
     background-color: transparent !important;
   }
@@ -82,23 +81,27 @@ Second, add a new JavaScript file at `/assets/js/copy-button.js`:
 /***
  * JavaScript to handle copy-to-clipboard functionality for code blocks.
  */
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.copy-button').forEach(button => {
-    button.addEventListener('click', () => {
-      const wrapper = button.closest('.code-block');
-      const raw = wrapper?.querySelector('.code-raw');
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".copy-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      const wrapper = button.closest(".code-block");
+      const raw = wrapper?.querySelector(".code-raw");
 
       // Prefer raw code (exact). Fallback to highlighted code only if needed.
-      let text = raw?.textContent ?? wrapper?.querySelector('code')?.textContent ?? '';
-      text = text.replace(/\n+$/, ''); // trim trailing blank lines
+      let text =
+        raw?.textContent ?? wrapper?.querySelector("code")?.textContent ?? "";
+      text = text.replace(/\n+$/, ""); // trim trailing blank lines
 
       if (!text) return;
 
-      navigator.clipboard.writeText(text).then(() => {
-        const originalIcon = button.innerHTML;
-        button.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
-        setTimeout(() => (button.innerHTML = originalIcon), 2000);
-      }).catch(err => console.error('Failed to copy: ', err));
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
+          const originalIcon = button.innerHTML;
+          button.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+          setTimeout(() => (button.innerHTML = originalIcon), 2000);
+        })
+        .catch((err) => console.error("Failed to copy: ", err));
     });
   });
 });
@@ -106,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 Third, add a Hugo render hook for the code blocks at `/layouts/_markup/render-codeblock.html`:
 
-```html
+```go
 {{- .Page.Store.Set "hasCodeBlock" true -}}
 
 {{- $lang := .Type | default "text" -}}
@@ -145,10 +148,14 @@ Third, add a Hugo render hook for the code blocks at `/layouts/_markup/render-co
 
 Finally, tack this script onto the bottom of our footer at `/layouts/_partials/footer.html`:
 
-```html
-{{/* Only load the script if a code block was rendered on this page */}}
-{{ if .Page.Store.Get "hasCodeBlock" }}
-{{ $copyJs := resources.Get "js/copy-button.js" | minify | fingerprint }}
-<script src="{{ $copyJs.RelPermalink }}" integrity="{{ $copyJs.Data.Integrity }}" defer></script>
+```go
+{{/* Only load the script if a code block was rendered on this page */}} {{ if
+.Page.Store.Get "hasCodeBlock" }} {{ $copyJs := resources.Get
+"js/copy-button.js" | minify | fingerprint }}
+<script
+  src="{{ $copyJs.RelPermalink }}"
+  integrity="{{ $copyJs.Data.Integrity }}"
+  defer
+></script>
 {{ end }}
 ```

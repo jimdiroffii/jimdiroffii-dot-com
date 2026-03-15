@@ -3,7 +3,7 @@ date = '2026-01-30T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 010'
 summary = 'Mobile hamburgers... mmm'
-tags = ["365-days-of-code-2026", "tailwindcss", "accessibility", "responsive-design", "javascript", "html", "css"]
+tags = ["365-days-of-code-2026", "tailwindcss", "responsive-design", "html", "css"]
 +++
 
 Today's code was simple, get the mobile layout configuration set. Most importantly, can we configured a mobile-style hamburger menu using CSS only? Yes, for the most part. One UI feature missing is that if you click the hamburger menu, it will stay open unless you click a button to close it. Since there is no JavaScript, there is no detection for clicks elsewhere on the page. I was willing to give up that functionality, and added a button to close the menu.
@@ -28,7 +28,7 @@ The CSS that needed to be added is fairly simple. The rest of the CSS is configu
 
 The HTML is more complicated. This is our new `nav` section, which is included in our `header` component at `/layouts/_partials/header.html`:
 
-```html
+```go
 <nav class="flex justify-between items-center gap-6 font-medium text-white" aria-label="Primary">
   {{- $brand := or site.Title "Jim Diroff II" -}}
   <a href="{{ " /" | relLangURL }}" class="text-lg font-bold">
