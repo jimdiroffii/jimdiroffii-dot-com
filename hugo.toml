@@ -1,6 +1,6 @@
 # Base Data
 baseURL = 'https://www.jimdiroffii.com/'
-languageCode = 'en-US'
+locale = 'en-US'
 title = 'Jim Diroff II'
 enableRobotsTXT = true
 
