@@ -1,7 +1,7 @@
 +++
-date = '2026-03-25T00:00:01-05:00'
+date = '2026-03-26T00:00:01-05:00'
 draft = false
-title = '365 Days of Code - Day 064'
+title = '365 Days of Code - Day 065'
 summary = ''
 tags = ['365-days-of-code', 'codingame', 'c']
 +++
