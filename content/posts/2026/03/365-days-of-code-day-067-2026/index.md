@@ -189,6 +189,8 @@ int midpoint_ceil(int num1, int num2)
 I'll use a `switch` statement to choose the correct algorithm for each direction of travel. To do this, I need to convert the direction provided into an integer.
 
 > **Note**: In C, `strcmp` returns `0` if the strings match, which is actually `false`. Hence, the operation must be `not`.
+>
+> **Note 2**: It seems universally accepted that using `!strcmp` is a poor C idiom, so this was changed to `== 0`.
 
 ```c
 int bomb_dir_enum = -1;
