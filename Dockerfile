@@ -4,7 +4,7 @@
 # Versioning
 # ---------------------------------------------------
 ARG ALPINE_VERSION=3.23
-ARG HUGO_VERSION=0.158.0 
+ARG HUGO_VERSION=0.159.2 
 ARG NODE_VERSION=24
 
 # ---------------------------------------------------
