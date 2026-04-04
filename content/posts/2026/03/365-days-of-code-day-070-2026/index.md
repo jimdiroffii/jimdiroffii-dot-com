@@ -3,7 +3,7 @@ date = '2026-03-31T00:00:01-05:00'
 draft = false
 title = '365 Days of Code - Day 070'
 summary = ''
-tags = ['365-days-of-code', 'codingame', 'c']
+tags = ['365-days-of-code']
 +++
 
 ## Project Status
