@@ -1,5 +1,5 @@
 +++
-date = '2026-04-01T00:00:01-05:00'
+date = '2026-04-24T00:00:01-05:00'
 draft = false
 title = 'Turn a Laptop Into an Encrypted Rocky Linux Server'
 summary = 'Configuring a laptop as a Rocky Linux server: battery limits, FIPS, and remote LUKS unlock over SSH.'
