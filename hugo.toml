@@ -9,6 +9,9 @@ enableRobotsTXT = true
 [params]
   description = 'Portfolio and Personal Blog for Jim Diroff II'
 
+[security.exec]
+  allow = ['^((dart-)?sass|go|npx|babel|node|git|postcss|tailwindcss)$']
+
 # These build and module sections currently support Tailwind
 [build]
   [build.buildStats]
