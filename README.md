@@ -56,3 +56,29 @@ ARG HUGO_VERSION=0.165.0
 ```
 
 Save and push changes.
+
+### Alpine and Nginx
+
+The modifiable Alpine image is only used for pulling the Hugo installer. It doesn't have a big impact on the build.
+
+The Nginx build is a bit more important, since it runs the final container that hosts the site. I stick with the stable version.
+
+[Alpine Releases](https://hub.docker.com/_/alpine)
+[Nginx Releases](https://hub.docker.com/_/nginx)
+
+Modify the Dockerfile. Been focusing on major releases, so ignoring the minor version numbers.
+
+```yaml
+ARG ALPINE_VERSION=3.24
+ARG NGINX_VERSION=1.30
+```
+
+### Node
+
+Stick with the latest major LTS release. Ensure the local dev environment is updated and tested before modifying this in the Dockerfile.
+
+[Node Releases](https://nodejs.org/en/download)
+
+```yaml
+ARG NODE_VERSION=24
+```
