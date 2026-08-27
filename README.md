@@ -2,7 +2,7 @@
 
 [![Deploy Hugo Site](https://github.com/jimdiroffii/jimdiroffii-dot-com/actions/workflows/deploy-docker-jimdiroffii-dot-com.yml/badge.svg)](https://github.com/jimdiroffii/jimdiroffii-dot-com/actions/workflows/deploy-docker-jimdiroffii-dot-com.yml)
 
-- Current Hugo Version: `0.159.2`
+- Current Hugo Version: `0.165.0`
 
 [jimdiroffii.com](https://www.jimdiroffii.com)
 
