@@ -6,6 +6,7 @@
 ARG ALPINE_VERSION=3.24
 ARG HUGO_VERSION=0.165.0
 ARG NODE_VERSION=24
+ARG NGINX_VERSION=1.30
 
 # ---------------------------------------------------
 # Stage 1: Get Hugo Binary
@@ -37,7 +38,7 @@ RUN hugo --minify --gc
 # ---------------------------------------------------
 # Stage 3: Serve with Nginx
 # ---------------------------------------------------
-FROM nginx:alpine
+FROM nginx:${NGINX_VERSION}-alpine
 COPY --from=builder /app/public /usr/share/nginx/html
 COPY .nginx/default.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
